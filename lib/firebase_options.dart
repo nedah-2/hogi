@@ -50,19 +50,22 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBykcRfDex0DfPnJ38Zw8x5QIp9Edsz5lI',
-    appId: '1:760075089456:web:1d9713f8a3caedb0241ff5',
-    messagingSenderId: '760075089456',
-    projectId: 'hogi-c01d9',
-    authDomain: 'hogi-c01d9.firebaseapp.com',
-    storageBucket: 'hogi-c01d9.appspot.com',
-  );
+      apiKey: "AIzaSyBykcRfDex0DfPnJ38Zw8x5QIp9Edsz5lI",
+      authDomain: "hogi-c01d9.firebaseapp.com",
+      databaseURL:
+          "https://hogi-c01d9-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "hogi-c01d9",
+      storageBucket: "hogi-c01d9.appspot.com",
+      messagingSenderId: "760075089456",
+      appId: "1:760075089456:web:1d9713f8a3caedb0241ff5");
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAVIVfa-W27OKAnNNF-2oRxGAllMSuiTFQ',
     appId: '1:760075089456:android:40fb4d32a0b89049241ff5',
     messagingSenderId: '760075089456',
     projectId: 'hogi-c01d9',
+    databaseURL:
+        'https://hogi-c01d9-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'hogi-c01d9.appspot.com',
   );
 }

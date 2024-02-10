@@ -50,10 +50,9 @@ class NotificationServices {
       "message": {
         "topic": "news",
         "notification": {
-          "title": "Breaking News",
-          "body": "New news story available."
+          "title": "Order Received",
+          "body": "A new order has been placed. Tap to manage."
         },
-        "data": {"story_id": "story_12345"}
       }
     });
   }
@@ -61,7 +60,6 @@ class NotificationServices {
   Future<void> sendPushMessage() async {
     try {
       final serverKey = await getAccessToken();
-      print(serverKey);
       final response = await http.post(
         Uri.parse(
             'https://fcm.googleapis.com/v1/projects/hogi-c01d9/messages:send'),
