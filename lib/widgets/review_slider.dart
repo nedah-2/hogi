@@ -1,29 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-class ImageCarousel extends StatefulWidget {
-  const ImageCarousel({Key? key}) : super(key: key);
+class ReviewCarousel extends StatefulWidget {
+  const ReviewCarousel({Key? key}) : super(key: key);
 
   @override
-  State<ImageCarousel> createState() => _ImageCarouselState();
+  State<ReviewCarousel> createState() => _ReviewCarouselState();
 }
 
-class _ImageCarouselState extends State<ImageCarousel> {
+class _ReviewCarouselState extends State<ReviewCarousel> {
   CarouselController buttonCarouselController = CarouselController();
   int _currentIndex = 0;
   final ScrollController _scrollController = ScrollController();
 
   final List<Widget> _placeholders = [
-    Image.asset('assets/tran1.jpg', fit: BoxFit.cover),
-    Image.asset('assets/tran2.jpg', fit: BoxFit.cover),
-    Image.asset('assets/tran3.jpg', fit: BoxFit.cover),
-    Image.asset('assets/tran4.jpg', fit: BoxFit.cover),
-    Image.asset('assets/tran5.jpg', fit: BoxFit.cover),
-    Image.asset('assets/tran6.jpg', fit: BoxFit.cover),
-    Image.asset('assets/tran7.jpg', fit: BoxFit.cover),
-    Image.asset('assets/tran8.jpg', fit: BoxFit.cover),
-    Image.asset('assets/tran9.jpg', fit: BoxFit.cover),
-    Image.asset('assets/tran10.jpg', fit: BoxFit.cover),
+    Image.asset('assets/review1.jpg', fit: BoxFit.fitHeight),
+    Image.asset('assets/review2.jpg', fit: BoxFit.fitHeight),
+    Image.asset('assets/review3.jpg', fit: BoxFit.fitHeight),
+    Image.asset('assets/review4.jpg', fit: BoxFit.fitHeight),
+    Image.asset('assets/review5.jpg', fit: BoxFit.fitHeight),
     // Add more placeholder widgets as necessary
   ];
 
@@ -38,7 +33,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
                 return Container(
                   width: MediaQuery.of(context).size.width,
                   decoration: const BoxDecoration(
-                    color: Colors.grey,
+                    color: Colors.white,
                   ),
                   child: placeholder,
                 );

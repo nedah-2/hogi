@@ -3,6 +3,7 @@ import 'package:hogi_milk/providers/data_provider.dart';
 import 'package:hogi_milk/widgets/custom_form.dart';
 import 'package:hogi_milk/widgets/image_only_slider.dart';
 import 'package:hogi_milk/widgets/image_slider.dart';
+import 'package:hogi_milk/widgets/review_slider.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -219,7 +220,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 // FDA Proof Letter
                 Container(
-                    padding: const EdgeInsets.fromLTRB(24, 0, 24, 12),
+                    padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
                     color: Colors.grey.shade50,
                     height: 500,
                     child: Image.asset('assets/fda.jpg')),
@@ -237,8 +238,11 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 // Another Image Carousel
-                const ImageCarousel(),
-                const SizedBox(height: 16),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16.0),
+                  child: ReviewCarousel(),
+                ),
+
                 // About Hogi Milk
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 24),
@@ -435,582 +439,718 @@ class HomeScreen extends StatelessWidget {
                 ),
                 // Order Form
                 const MyForm(),
-                // Container(
-                //   padding: const EdgeInsets.symmetric(
-                //       vertical: 24.0, horizontal: 16),
-                //   color: Colors.greenAccent.shade100,
-                //   child: const Column(
-                //     crossAxisAlignment: CrossAxisAlignment.center,
-                //     children: [
-                //       Text(
-                //         'အဝလွန်ခြင်း၏ဆိုးကျိုးများ',
-                //         style: TextStyle(
-                //           fontWeight: FontWeight.bold,
-                //           color: Colors.red,
-                //           fontSize: 20.0,
-                //         ),
-                //       ),
-                //       SizedBox(height: 32.0),
-                //       AspectRatio(
-                //         aspectRatio: 4 / 3,
-                //         child: Placeholder(),
-                //       ),
-                //       SizedBox(height: 24.0),
-                //       Row(
-                //         crossAxisAlignment: CrossAxisAlignment.center,
-                //         children: [
-                //           Icon(
-                //             Icons.warning,
-                //             color: Colors.red,
-                //           ),
-                //           SizedBox(width: 12.0),
-                //           Expanded(
-                //             child: Text(
-                //               'အစာခြေစနစ်နှင့်ပတ်သက်သောရောဂါများ ဥပမာ ဇီဝဖြစ်စဉ်မမှန်ခြင်း၊ သည်းခြေကျောက်တည်ခြင်း။',
-                //               style: TextStyle(
-                //                   color: Colors.black,
-                //                   fontSize: 12.0,
-                //                   height: 1.8,
-                //                   fontWeight: FontWeight.w700),
-                //             ),
-                //           ),
-                //         ],
-                //       ),
-                //       SizedBox(height: 12.0),
-                //       Row(
-                //         crossAxisAlignment: CrossAxisAlignment.center,
-                //         children: [
-                //           Icon(
-                //             Icons.warning,
-                //             color: Colors.red,
-                //           ),
-                //           SizedBox(width: 12.0),
-                //           Expanded(
-                //             child: Text(
-                //               'အဆီများသောသွေးနှင့် ဦးနှောက်သွေးကြောဆိုင်ရာ မတော်တဆမှုကဲ့သို့သော နှလုံးသွေးကြောဆိုင်ရာရောဂါများ ခံစားရနိုင်ခြေ၊ နှလုံးနှင့်ပတ်သက်သောရောဂါများ။',
-                //               style: TextStyle(
-                //                   color: Colors.black,
-                //                   fontSize: 12.0,
-                //                   height: 1.8,
-                //                   fontWeight: FontWeight.w700),
-                //             ),
-                //           ),
-                //         ],
-                //       ),
-                //       SizedBox(height: 12.0),
-                //       Row(
-                //         crossAxisAlignment: CrossAxisAlignment.center,
-                //         children: [
-                //           Icon(
-                //             Icons.warning,
-                //             color: Colors.red,
-                //           ),
-                //           SizedBox(width: 12.0),
-                //           Expanded(
-                //             child: Text(
-                //               'အရိုးနှင့် အဆစ်များနှင့် ပတ်သက်သော ရောဂါများဖြစ်သည့် အဆစ်အမြစ်ရောင်ခြင်း၊ အရိုးအဆစ်ရောင်ခြင်း၊ ရောင်ရမ်းခြင်းနှင့် spondylosis။',
-                //               style: TextStyle(
-                //                   color: Colors.black,
-                //                   fontSize: 12.0,
-                //                   height: 1.8,
-                //                   fontWeight: FontWeight.w700),
-                //             ),
-                //           ),
-                //         ],
-                //       ),
-                //       SizedBox(height: 12.0),
-                //       Row(
-                //         crossAxisAlignment: CrossAxisAlignment.center,
-                //         children: [
-                //           Icon(
-                //             Icons.warning,
-                //             color: Colors.red,
-                //           ),
-                //           SizedBox(width: 12.0),
-                //           Expanded(
-                //             child: Text(
-                //               'ဆီးချိုရောဂါ၊ ဂေါက်။',
-                //               style: TextStyle(
-                //                   color: Colors.black,
-                //                   fontSize: 12.0,
-                //                   height: 1.8,
-                //                   fontWeight: FontWeight.w700),
-                //             ),
-                //           ),
-                //         ],
-                //       ),
-                //     ],
-                //   ),
-                // ),
-                // Container(
-                //   padding: const EdgeInsets.symmetric(vertical: 24.0),
-                //   child: Column(
-                //     children: [
-                //       const AspectRatio(
-                //         aspectRatio: 4 / 3,
-                //         child: Placeholder(),
-                //       ),
-                //       Padding(
-                //         padding: const EdgeInsets.symmetric(
-                //             horizontal: 8, vertical: 16),
-                //         child: Column(
-                //           children: [
-                //             Row(
-                //               children: [
-                //                 const CircleAvatar(
-                //                   radius: 40.0,
-                //                   child:
-                //                       Placeholder(), // Placeholder image asset
-                //                 ),
-                //                 const SizedBox(width: 12.0),
-                //                 Expanded(
-                //                   child: RichText(
-                //                     text: const TextSpan(
-                //                       style: TextStyle(
-                //                           color: Colors.black,
-                //                           fontSize: 13.0,
-                //                           fontWeight: FontWeight.bold,
-                //                           height: 0),
-                //                       children: [
-                //                         TextSpan(
-                //                           text: 'US မှ 100% Colostrum ',
-                //                           style: TextStyle(color: Colors.red),
-                //                         ),
-                //                         TextSpan(
-                //                           text:
-                //                               'Hogi နည်းပညာမြင့်နို့ရည်သည် ၎င်း၏ထိရောက်မှု၊ ဘေးကင်းမှု၊ နူးညံ့သိမ်မွေ့မှုနှင့် ဘေးထွက်ဆိုးကျိုးမရှိသောကြောင့် အဝလွန်လူနာများအတွက် နံပါတ် ၁ အာဟာရကုထုံးဖြစ်သည်။',
-                //                         ),
-                //                       ],
-                //                     ),
-                //                   ),
-                //                 ),
-                //               ],
-                //             ),
-                //             const SizedBox(height: 24),
-                //             Row(
-                //               children: [
-                //                 const CircleAvatar(
-                //                   radius: 40.0,
-                //                   child:
-                //                       Placeholder(), // Placeholder image asset
-                //                 ),
-                //                 const SizedBox(width: 12.0),
-                //                 Expanded(
-                //                   child: RichText(
-                //                     text: const TextSpan(
-                //                       style: TextStyle(
-                //                           color: Colors.black,
-                //                           fontSize: 13.0,
-                //                           fontWeight: FontWeight.bold,
-                //                           height: 0),
-                //                       children: [
-                //                         TextSpan(
-                //                           text:
-                //                               'Hogi သည် ခန္ဓာကိုယ်အတွက် 100% အာဟာရဓာတ်များ ပါ၀င်သည် ။ ',
-                //                           style: TextStyle(color: Colors.red),
-                //                         ),
-                //                         TextSpan(
-                //                           text:
-                //                               'ဆန်အနှစ်၊ ပဲညွှန့်မှုန့်၊ ပြောင်းဖူးကစီဓာတ်၊ ဆန်လုံးညို၊ ဂျုံလုံး၊ ပဲပင်ပေါက်၊ ပဲပင်ပေါက်၊ chia စေ့များ၊ ဆာချီစေ့များ၊ ဖွဲနုဓာတ်၊ သတ္တုဓာတ်နှင့် အက်ဆစ်.',
-                //                           style: TextStyle(color: Colors.black),
-                //                         ),
-                //                       ],
-                //                     ),
-                //                   ),
-                //                 ),
-                //               ],
-                //             ),
-                //             const SizedBox(height: 24),
-                //             Row(
-                //               children: [
-                //                 const CircleAvatar(
-                //                   radius: 40.0,
-                //                   child:
-                //                       Placeholder(), // Placeholder image asset
-                //                 ),
-                //                 const SizedBox(width: 12.0),
-                //                 Expanded(
-                //                   child: RichText(
-                //                     text: const TextSpan(
-                //                       style: TextStyle(
-                //                           color: Colors.black,
-                //                           fontSize: 13.0,
-                //                           fontWeight: FontWeight.bold,
-                //                           height: 0),
-                //                       children: [
-                //                         TextSpan(
-                //                           text: 'အမေရိက၏ ထိပ်တန်း ',
-                //                           style: TextStyle(color: Colors.black),
-                //                         ),
-                //                         TextSpan(
-                //                           text: 'Phytosome ',
-                //                           style: TextStyle(color: Colors.red),
-                //                         ),
-                //                         TextSpan(
-                //                           text:
-                //                               'နည်းပညာသည် ပျက်စီးနေသော ကိုယ်တွင်းအင်္ဂါများကို ပြန်လည်ထူထောင်ရန်နှင့် အင်ဆူလင်ထုတ်လုပ်မှုကို ပြင်းထန်စွာ လှုံ့ဆော်ပေးနိုင်စွမ်းရှိသည်။',
-                //                           style: TextStyle(color: Colors.black),
-                //                         ),
-                //                       ],
-                //                     ),
-                //                   ),
-                //                 ),
-                //               ],
-                //             ),
-                //           ],
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // ),
-                // Container(
-                //   color: Colors.greenAccent.shade100,
-                //   padding:
-                //       const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-                //   child: Column(children: [
-                //     Padding(
-                //       padding: const EdgeInsets.only(bottom: 16.0),
-                //       child: RichText(
-                //         textAlign: TextAlign.center,
-                //         text: const TextSpan(
-                //           style: TextStyle(
-                //             color: Colors.black,
-                //             fontSize: 24.0,
-                //             fontWeight: FontWeight.bold,
-                //             height: 0,
-                //           ),
-                //           children: [
-                //             TextSpan(
-                //               text: 'HOGI\n',
-                //               style: TextStyle(color: Colors.red),
-                //             ),
-                //             TextSpan(
-                //               text: '၏လုပ်ဆောင်ချက်၏ယန္တရား',
-                //               style: TextStyle(color: Colors.black),
-                //             ),
-                //           ],
-                //         ),
-                //       ),
-                //     ),
-                //     Container(
-                //       decoration: BoxDecoration(
-                //           borderRadius: BorderRadius.circular(8),
-                //           color: Colors.white),
-                //       padding: const EdgeInsets.all(16),
-                //       margin: const EdgeInsets.symmetric(vertical: 16),
-                //       child: Row(
-                //         children: [
-                //           const CircleAvatar(
-                //             radius: 36.0,
-                //             child: Placeholder(), // Placeholder image asset
-                //           ),
-                //           const SizedBox(width: 12.0),
-                //           Expanded(
-                //             child: RichText(
-                //               text: const TextSpan(
-                //                 style: TextStyle(
-                //                     color: Colors.black,
-                //                     fontSize: 13.0,
-                //                     fontWeight: FontWeight.bold,
-                //                     height: 0),
-                //                 children: [
-                //                   TextSpan(
-                //                     text: '1-2 ကီလိုဂရမ်ဆုံးရှုံးသည်: \n',
-                //                     style: TextStyle(color: Colors.red),
-                //                   ),
-                //                   TextSpan(
-                //                     text:
-                //                         'အစားအစာအစားထိုး၊ ကျန်းမာရေးဖြည့်စွက်မှု၊ စွမ်းအင်ထောက်ပံ့မှု',
-                //                     style: TextStyle(color: Colors.black),
-                //                   ),
-                //                 ],
-                //               ),
-                //             ),
-                //           ),
-                //         ],
-                //       ),
-                //     ),
-                //     Container(
-                //       decoration: BoxDecoration(
-                //           borderRadius: BorderRadius.circular(8),
-                //           color: Colors.white),
-                //       padding: const EdgeInsets.all(16),
-                //       margin: const EdgeInsets.symmetric(vertical: 16),
-                //       child: Row(
-                //         children: [
-                //           const CircleAvatar(
-                //             radius: 36.0,
-                //             child: Placeholder(), // Placeholder image asset
-                //           ),
-                //           const SizedBox(width: 12.0),
-                //           Expanded(
-                //             child: RichText(
-                //               text: const TextSpan(
-                //                 style: TextStyle(
-                //                     color: Colors.black,
-                //                     fontSize: 13.0,
-                //                     fontWeight: FontWeight.bold,
-                //                     height: 0),
-                //                 children: [
-                //                   TextSpan(
-                //                     text: '2 ပတ် 3-4 ကီလိုဂရမ်ဆုံးရှုံးသည်: \n',
-                //                     style: TextStyle(color: Colors.red),
-                //                   ),
-                //                   TextSpan(
-                //                     text:
-                //                         'ဗီတာမင်နှင့် သတ္တုဓာတ်များဖြင့် ခိုင်ခံ့စေသည်။ အမျှင်ဓာတ်ကြွယ်ဝပြီး ခန္ဓာကိုယ်တွင်း ဇီဝဖြစ်ပျက်မှုကို မြှင့်တင်ပေးပါတယ်။',
-                //                     style: TextStyle(color: Colors.black),
-                //                   ),
-                //                 ],
-                //               ),
-                //             ),
-                //           ),
-                //         ],
-                //       ),
-                //     ),
-                //     Container(
-                //       decoration: BoxDecoration(
-                //           borderRadius: BorderRadius.circular(8),
-                //           color: Colors.white),
-                //       padding: const EdgeInsets.all(16),
-                //       margin: const EdgeInsets.symmetric(vertical: 16),
-                //       child: Row(
-                //         children: [
-                //           const CircleAvatar(
-                //             radius: 36.0,
-                //             child: Placeholder(), // Placeholder image asset
-                //           ),
-                //           const SizedBox(width: 12.0),
-                //           Expanded(
-                //             child: RichText(
-                //               text: const TextSpan(
-                //                 style: TextStyle(
-                //                     color: Colors.black,
-                //                     fontSize: 13.0,
-                //                     fontWeight: FontWeight.bold,
-                //                     height: 0),
-                //                 children: [
-                //                   TextSpan(
-                //                     text: '၁ လ 5-6 ကီလိုဂရမ်ဆုံးရှုံး:\n',
-                //                     style: TextStyle(color: Colors.red),
-                //                   ),
-                //                   TextSpan(
-                //                     text:
-                //                         'အဆီစုပ်ယူမှုကို လျှော့ချပေးပြီး ကိုယ်အလေးချိန်ကို ထိန်းပေးသည်။',
-                //                     style: TextStyle(color: Colors.black),
-                //                   ),
-                //                 ],
-                //               ),
-                //             ),
-                //           ),
-                //         ],
-                //       ),
-                //     ),
-                //   ]),
-                // ),
-                // const MyForm(),
-                // const ImageOnlySlider(),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(vertical: 24.0),
-                //   child: Column(
-                //     crossAxisAlignment: CrossAxisAlignment.center,
-                //     children: [
-                //       const Text(
-                //         'ထိပ်တန်းမှတ်ချက်',
-                //         style: TextStyle(
-                //           fontSize: 24.0,
-                //           fontWeight: FontWeight.bold,
-                //         ),
-                //       ),
-                //       const SizedBox(height: 8.0),
-                //       Container(
-                //         padding: const EdgeInsets.all(16),
-                //         margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                //         decoration: BoxDecoration(
-                //             border: const Border.fromBorderSide(
-                //               BorderSide(
-                //                 color: Colors.green,
-                //                 width: 3.0,
-                //                 style: BorderStyle.solid,
-                //               ),
-                //             ),
-                //             borderRadius: BorderRadius.circular(8)),
-                //         child: Column(
-                //           crossAxisAlignment: CrossAxisAlignment.start,
-                //           children: [
-                //             const AspectRatio(
-                //               aspectRatio: 4 / 3,
-                //               child: Placeholder(),
-                //             ),
-                //             const SizedBox(height: 16.0),
-                //             const Text(
-                //               'Thar Lay',
-                //               style: TextStyle(
-                //                   fontSize: 18.0, fontWeight: FontWeight.bold),
-                //             ),
-                //             const SizedBox(height: 12.0),
-                //             Row(
-                //               children: List.generate(
-                //                 5,
-                //                 (index) => const Icon(
-                //                   Icons.star,
-                //                   color: Colors.yellow,
-                //                 ),
-                //               ),
-                //             ),
-                //             const SizedBox(height: 12.0),
-                //             const Text(
-                //               'ဘုရားရေ! ဒီထုတ်ကုန်ကိုသုံးပြီး 3 ပတ်အကြာမှာ 4 ပေါင်ကျသွားတယ်။ အဲဒါက ဘေးကင်းတယ်၊ ထိရောက်တယ်၊ အသုံးပြုရလွယ်ကူတယ်။',
-                //               style: TextStyle(
-                //                   fontSize: 14.0,
-                //                   fontWeight: FontWeight.w700,
-                //                   height: 1.8),
-                //             ),
-                //           ],
-                //         ),
-                //       ),
-                //       Container(
-                //         padding: const EdgeInsets.all(16),
-                //         margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                //         decoration: BoxDecoration(
-                //             border: const Border.fromBorderSide(
-                //               BorderSide(
-                //                 color: Colors.green,
-                //                 width: 3.0,
-                //                 style: BorderStyle.solid,
-                //               ),
-                //             ),
-                //             borderRadius: BorderRadius.circular(8)),
-                //         child: Column(
-                //           crossAxisAlignment: CrossAxisAlignment.start,
-                //           children: [
-                //             const AspectRatio(
-                //               aspectRatio: 4 / 3,
-                //               child: Placeholder(),
-                //             ),
-                //             const SizedBox(height: 16.0),
-                //             const Text(
-                //               'May Myat Mon',
-                //               style: TextStyle(
-                //                   fontSize: 18.0, fontWeight: FontWeight.bold),
-                //             ),
-                //             const SizedBox(height: 12.0),
-                //             Row(
-                //               children: List.generate(
-                //                 5,
-                //                 (index) => const Icon(
-                //                   Icons.star,
-                //                   color: Colors.yellow,
-                //                 ),
-                //               ),
-                //             ),
-                //             const SizedBox(height: 12.0),
-                //             const Text(
-                //               'ဒီထုတ်ကုန်ကို သုံးနေတာ 2 လရှိပြီ ရလဒ်တွေက မျှော်လင့်ထားတာထက် ကျော်လွန်နေပါပြီ။ အိပ်ရေးမဝတော့ဘူး။ ဒီမနက် အိပ်ရာက အရမ်း တက်ကြွနေပြီး အခုတော့ အားအင်တွေ ပြည့်နေပြီ ။ တစ်ခါမှ ဒီလောက်မသက်သာဖူးဘူး။',
-                //               style: TextStyle(
-                //                   fontSize: 14.0,
-                //                   fontWeight: FontWeight.w700,
-                //                   height: 1.8),
-                //             ),
-                //           ],
-                //         ),
-                //       ),
-                //       Container(
-                //         padding: const EdgeInsets.all(16),
-                //         margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                //         decoration: BoxDecoration(
-                //             border: const Border.fromBorderSide(
-                //               BorderSide(
-                //                 color: Colors.green,
-                //                 width: 3.0,
-                //                 style: BorderStyle.solid,
-                //               ),
-                //             ),
-                //             borderRadius: BorderRadius.circular(8)),
-                //         child: Column(
-                //           crossAxisAlignment: CrossAxisAlignment.start,
-                //           children: [
-                //             const AspectRatio(
-                //               aspectRatio: 4 / 3,
-                //               child: Placeholder(),
-                //             ),
-                //             const SizedBox(height: 16.0),
-                //             const Text(
-                //               'Alex sandro',
-                //               style: TextStyle(
-                //                   fontSize: 18.0, fontWeight: FontWeight.bold),
-                //             ),
-                //             const SizedBox(height: 12.0),
-                //             Row(
-                //               children: List.generate(
-                //                 5,
-                //                 (index) => const Icon(
-                //                   Icons.star,
-                //                   color: Colors.yellow,
-                //                 ),
-                //               ),
-                //             ),
-                //             const SizedBox(height: 12.0),
-                //             const Text(
-                //               '5 ဗူးကို ခဏလောက်သုံးပြီးရင် အသားအရေက အရမ်းကောင်းလာပြီး တစ်ကိုယ်လုံး သန်စွမ်းလာပါပြီ။ မျက်နှာ ဖြူ ပြာ မရှိတော့ဘူး။ HOGI MILK က တကယ်ကို အကြံပြုလိုပါတယ်။',
-                //               style: TextStyle(
-                //                   fontSize: 14.0,
-                //                   fontWeight: FontWeight.w700,
-                //                   height: 1.8),
-                //             ),
-                //           ],
-                //         ),
-                //       ),
-                //       Container(
-                //         padding: const EdgeInsets.all(16),
-                //         margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                //         decoration: BoxDecoration(
-                //             border: const Border.fromBorderSide(
-                //               BorderSide(
-                //                 color: Colors.green,
-                //                 width: 3.0,
-                //                 style: BorderStyle.solid,
-                //               ),
-                //             ),
-                //             borderRadius: BorderRadius.circular(8)),
-                //         child: Column(
-                //           crossAxisAlignment: CrossAxisAlignment.start,
-                //           children: [
-                //             const AspectRatio(
-                //               aspectRatio: 4 / 3,
-                //               child: Placeholder(),
-                //             ),
-                //             const SizedBox(height: 16.0),
-                //             const Text(
-                //               'Zar Lay',
-                //               style: TextStyle(
-                //                   fontSize: 18.0, fontWeight: FontWeight.bold),
-                //             ),
-                //             const SizedBox(height: 12.0),
-                //             Row(
-                //               children: List.generate(
-                //                 5,
-                //                 (index) => const Icon(
-                //                   Icons.star,
-                //                   color: Colors.yellow,
-                //                 ),
-                //               ),
-                //             ),
-                //             const SizedBox(height: 12.0),
-                //             const Text(
-                //               '3 ဗူးဝယ်ပြီး 1 ဗူးပဲကျန်တော့တာ တကယ်စိတ်ရှည်ဖို့ပဲလိုတာပါ။ အလယ်မှာသာသုံးရင် အလုပ်မဖြစ်ပါဘူး။',
-                //               style: TextStyle(
-                //                   fontSize: 14.0,
-                //                   fontWeight: FontWeight.w700,
-                //                   height: 1.8),
-                //             ),
-                //           ],
-                //         ),
-                //       ),
-
-                // ],
-                //),
-                //),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 24.0, horizontal: 16),
+                  color: const Color.fromRGBO(220, 252, 202, 1),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'အဝလွန်ခြင်း၏ဆိုးကျိုးများ',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                      const SizedBox(height: 32.0),
+                      Image.asset('assets/obese.png', fit: BoxFit.cover),
+                      const SizedBox(height: 24.0),
+                      const Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.warning,
+                            color: Colors.red,
+                          ),
+                          SizedBox(width: 12.0),
+                          Expanded(
+                            child: Text(
+                              'အစာခြေစနစ်နှင့်ပတ်သက်သောရောဂါများ ဥပမာ ဇီဝဖြစ်စဉ်မမှန်ခြင်း၊ သည်းခြေကျောက်တည်ခြင်း။',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 12.0,
+                                  height: 1.8,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12.0),
+                      const Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.warning,
+                            color: Colors.red,
+                          ),
+                          SizedBox(width: 12.0),
+                          Expanded(
+                            child: Text(
+                              'အဆီများသောသွေးနှင့် ဦးနှောက်သွေးကြောဆိုင်ရာ မတော်တဆမှုကဲ့သို့သော နှလုံးသွေးကြောဆိုင်ရာရောဂါများ ခံစားရနိုင်ခြေ၊ နှလုံးနှင့်ပတ်သက်သောရောဂါများ။',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 12.0,
+                                  height: 1.8,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12.0),
+                      const Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.warning,
+                            color: Colors.red,
+                          ),
+                          SizedBox(width: 12.0),
+                          Expanded(
+                            child: Text(
+                              'အရိုးနှင့် အဆစ်များနှင့် ပတ်သက်သော ရောဂါများဖြစ်သည့် အဆစ်အမြစ်ရောင်ခြင်း၊ အရိုးအဆစ်ရောင်ခြင်း၊ ရောင်ရမ်းခြင်းနှင့် spondylosis။',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 12.0,
+                                  height: 1.8,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12.0),
+                      const Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.warning,
+                            color: Colors.red,
+                          ),
+                          SizedBox(width: 12.0),
+                          Expanded(
+                            child: Text(
+                              'ဆီးချိုရောဂါ၊ ဂေါက်။',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 12.0,
+                                  height: 1.8,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 24.0),
+                  child: Column(
+                    children: [
+                      Image.asset('assets/advantage.jpg', fit: BoxFit.cover),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 16),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                const CircleAvatar(
+                                  radius: 40.0,
+                                  backgroundColor: Colors.white,
+                                  backgroundImage: AssetImage('assets/h1.png'),
+                                ),
+                                const SizedBox(width: 12.0),
+                                Expanded(
+                                  child: RichText(
+                                    text: const TextSpan(
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 13.0,
+                                          fontWeight: FontWeight.bold,
+                                          height: 0),
+                                      children: [
+                                        TextSpan(
+                                          text: 'US မှ 100% Colostrum ',
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                        TextSpan(
+                                          text:
+                                              'Hogi နည်းပညာမြင့်နို့ရည်သည် ၎င်း၏ထိရောက်မှု၊ ဘေးကင်းမှု၊ နူးညံ့သိမ်မွေ့မှုနှင့် ဘေးထွက်ဆိုးကျိုးမရှိသောကြောင့် အဝလွန်လူနာများအတွက် နံပါတ် ၁ အာဟာရကုထုံးဖြစ်သည်။',
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 24),
+                            Row(
+                              children: [
+                                const CircleAvatar(
+                                  radius: 40.0,
+                                  backgroundColor: Colors.white,
+                                  backgroundImage: AssetImage('assets/h2.png'),
+                                ),
+                                const SizedBox(width: 12.0),
+                                Expanded(
+                                  child: RichText(
+                                    text: const TextSpan(
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 13.0,
+                                          fontWeight: FontWeight.bold,
+                                          height: 0),
+                                      children: [
+                                        TextSpan(
+                                          text:
+                                              'Hogi သည် ခန္ဓာကိုယ်အတွက် 100% အာဟာရဓာတ်များ ပါ၀င်သည် ။ ',
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                        TextSpan(
+                                          text:
+                                              'ဆန်အနှစ်၊ ပဲညွှန့်မှုန့်၊ ပြောင်းဖူးကစီဓာတ်၊ ဆန်လုံးညို၊ ဂျုံလုံး၊ ပဲပင်ပေါက်၊ ပဲပင်ပေါက်၊ chia စေ့များ၊ ဆာချီစေ့များ၊ ဖွဲနုဓာတ်၊ သတ္တုဓာတ်နှင့် အက်ဆစ်.',
+                                          style: TextStyle(color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 24),
+                            Row(
+                              children: [
+                                const CircleAvatar(
+                                  radius: 40.0,
+                                  backgroundColor: Colors.white,
+                                  backgroundImage: AssetImage('assets/h3.png'),
+                                ),
+                                const SizedBox(width: 12.0),
+                                Expanded(
+                                  child: RichText(
+                                    text: const TextSpan(
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 13.0,
+                                          fontWeight: FontWeight.bold,
+                                          height: 0),
+                                      children: [
+                                        TextSpan(
+                                          text: 'အမေရိက၏ ထိပ်တန်း ',
+                                          style: TextStyle(color: Colors.black),
+                                        ),
+                                        TextSpan(
+                                          text: 'Phytosome ',
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                        TextSpan(
+                                          text:
+                                              'နည်းပညာသည် ပျက်စီးနေသော ကိုယ်တွင်းအင်္ဂါများကို ပြန်လည်ထူထောင်ရန်နှင့် အင်ဆူလင်ထုတ်လုပ်မှုကို ပြင်းထန်စွာ လှုံ့ဆော်ပေးနိုင်စွမ်းရှိသည်။',
+                                          style: TextStyle(color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  color: const Color.fromRGBO(220, 252, 202, 0.6),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+                  child: Column(children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 16.0),
+                      child: RichText(
+                        textAlign: TextAlign.center,
+                        text: const TextSpan(
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.bold,
+                            height: 0,
+                          ),
+                          children: [
+                            TextSpan(
+                              text: 'HOGI\n',
+                              style: TextStyle(color: Colors.red),
+                            ),
+                            TextSpan(
+                              text: '၏လုပ်ဆောင်ချက်၏ယန္တရား',
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.white),
+                      padding: const EdgeInsets.all(16),
+                      margin: const EdgeInsets.symmetric(vertical: 16),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 80,
+                            height: 80,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                color: const Color.fromRGBO(28, 0, 194, 1),
+                                border: Border.all(
+                                    width: 4,
+                                    color: Colors.white.withOpacity(0.5)),
+                                shape: BoxShape.circle),
+                            child: const Text(
+                              '၁ပတ်',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 12.0),
+                          Expanded(
+                            child: RichText(
+                              text: const TextSpan(
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.bold,
+                                    height: 0),
+                                children: [
+                                  TextSpan(
+                                    text: '1-2 ကီလိုဂရမ်ဆုံးရှုံးသည်: \n',
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                  TextSpan(
+                                    text:
+                                        'အစားအစာအစားထိုး၊ ကျန်းမာရေးဖြည့်စွက်မှု၊ စွမ်းအင်ထောက်ပံ့မှု',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.white),
+                      padding: const EdgeInsets.all(16),
+                      margin: const EdgeInsets.symmetric(vertical: 16),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 80,
+                            height: 80,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                color: const Color.fromRGBO(28, 0, 194, 1),
+                                border: Border.all(
+                                    width: 4,
+                                    color: Colors.white.withOpacity(0.5)),
+                                shape: BoxShape.circle),
+                            child: const Text(
+                              '၂ပတ်',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 12.0),
+                          Expanded(
+                            child: RichText(
+                              text: const TextSpan(
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.bold,
+                                    height: 0),
+                                children: [
+                                  TextSpan(
+                                    text: '2 ပတ် 3-4 ကီလိုဂရမ်ဆုံးရှုံးသည်: \n',
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                  TextSpan(
+                                    text:
+                                        'ဗီတာမင်နှင့် သတ္တုဓာတ်များဖြင့် ခိုင်ခံ့စေသည်။ အမျှင်ဓာတ်ကြွယ်ဝပြီး ခန္ဓာကိုယ်တွင်း ဇီဝဖြစ်ပျက်မှုကို မြှင့်တင်ပေးပါတယ်။',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.white),
+                      padding: const EdgeInsets.all(16),
+                      margin: const EdgeInsets.symmetric(vertical: 16),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 80,
+                            height: 80,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                color: const Color.fromRGBO(28, 0, 194, 1),
+                                border: Border.all(
+                                    width: 4,
+                                    color: Colors.white.withOpacity(0.5)),
+                                shape: BoxShape.circle),
+                            child: const Text(
+                              '၁လ',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 12.0),
+                          Expanded(
+                            child: RichText(
+                              text: const TextSpan(
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.bold,
+                                    height: 0),
+                                children: [
+                                  TextSpan(
+                                    text: '၁ လ 5-6 ကီလိုဂရမ်ဆုံးရှုံး:\n',
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                  TextSpan(
+                                    text:
+                                        'အဆီစုပ်ယူမှုကို လျှော့ချပေးပြီး ကိုယ်အလေးချိန်ကို ထိန်းပေးသည်။',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ]),
+                ),
+                // Image Only Slider
+                const ImageOnlySlider(),
+                // Warning
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 80,
+                    child: Image.asset('assets/alert.png'),
+                  ),
+                ),
+                Container(
+                  color: Colors.red,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                  child: const Text(
+                    'ကုန်ပစ္စည်းအတုများ လက်ခံရရှိခြင်းမှ ရှောင်ကြဉ်ရန်၊ ကျေးဇူးပြု၍ ဘေလ်ပေါ်ရှိ ပေးပို့သူ အချက်အလက်ကို စစ်ဆေးပြီး ဓာတ်ပုံတွင် ပြထားသည့်အတိုင်း ပေးပို့သူ အချက်အလက်ဖြင့် မှန်ကန်သော မှာယူမှုကိုသာ လက်ခံပါ။',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        height: 1.8),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                // Post Address
+                Container(
+                  color: Colors.grey.shade200,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                  child: const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'NINJA VAN',
+                          style: TextStyle(
+                              fontSize: 40,
+                              fontWeight: FontWeight.bold,
+                              height: 0),
+                        ),
+                        Text(
+                          'AIRWAY BILL',
+                          style: TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.w300,
+                              height: 0),
+                        ),
+                        SizedBox(height: 32),
+                        Text(
+                          'FROM (SENDER)',
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.w300),
+                        ),
+                        SizedBox(height: 8),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.person,
+                              size: 32,
+                            ),
+                            SizedBox(width: 12),
+                            Text(
+                              '9028841 - Mya Vina (CITY)',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 8),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.phone,
+                              size: 32,
+                            ),
+                            SizedBox(width: 12),
+                            Text(
+                              '959670477400',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 8),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.map,
+                              size: 32,
+                            ),
+                            SizedBox(width: 12),
+                            Text(
+                              'South Dagon',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                          ],
+                        ),
+                      ]),
+                ),
+                // Order Form
+                const MyForm(),
+                // Top Comments
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 24.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'ထိပ်တန်းမှတ်ချက်',
+                        style: TextStyle(
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 8.0),
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                        decoration: BoxDecoration(
+                            border: const Border.fromBorderSide(
+                              BorderSide(
+                                color: Colors.green,
+                                width: 3.0,
+                                style: BorderStyle.solid,
+                              ),
+                            ),
+                            borderRadius: BorderRadius.circular(4)),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Image.asset(
+                              'assets/comment1.jpg',
+                              fit: BoxFit.cover,
+                            ),
+                            const SizedBox(height: 16.0),
+                            const Text(
+                              'Thar Lay',
+                              style: TextStyle(
+                                  fontSize: 18.0, fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(height: 12.0),
+                            Row(
+                              children: List.generate(
+                                5,
+                                (index) => const Icon(
+                                  Icons.star,
+                                  color: Colors.yellow,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 12.0),
+                            const Text(
+                              'ဘုရားရေ! ဒီထုတ်ကုန်ကိုသုံးပြီး 3 ပတ်အကြာမှာ 4 ပေါင်ကျသွားတယ်။ အဲဒါက ဘေးကင်းတယ်၊ ထိရောက်တယ်၊ အသုံးပြုရလွယ်ကူတယ်။',
+                              style: TextStyle(
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w700,
+                                  height: 1.8),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                        decoration: BoxDecoration(
+                            border: const Border.fromBorderSide(
+                              BorderSide(
+                                color: Colors.green,
+                                width: 3.0,
+                                style: BorderStyle.solid,
+                              ),
+                            ),
+                            borderRadius: BorderRadius.circular(4)),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Image.asset(
+                              'assets/comment2.jpg',
+                              fit: BoxFit.cover,
+                            ),
+                            const SizedBox(height: 16.0),
+                            const Text(
+                              'May Myat Mon',
+                              style: TextStyle(
+                                  fontSize: 18.0, fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(height: 12.0),
+                            Row(
+                              children: List.generate(
+                                5,
+                                (index) => const Icon(
+                                  Icons.star,
+                                  color: Colors.yellow,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 12.0),
+                            const Text(
+                              'ဒီထုတ်ကုန်ကို သုံးနေတာ 2 လရှိပြီ ရလဒ်တွေက မျှော်လင့်ထားတာထက် ကျော်လွန်နေပါပြီ။ အိပ်ရေးမဝတော့ဘူး။ ဒီမနက် အိပ်ရာက အရမ်း တက်ကြွနေပြီး အခုတော့ အားအင်တွေ ပြည့်နေပြီ ။ တစ်ခါမှ ဒီလောက်မသက်သာဖူးဘူး။',
+                              style: TextStyle(
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w700,
+                                  height: 1.8),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                        decoration: BoxDecoration(
+                            border: const Border.fromBorderSide(
+                              BorderSide(
+                                color: Colors.green,
+                                width: 3.0,
+                                style: BorderStyle.solid,
+                              ),
+                            ),
+                            borderRadius: BorderRadius.circular(4)),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Image.asset(
+                              'assets/comment3.jpg',
+                              fit: BoxFit.cover,
+                            ),
+                            const SizedBox(height: 16.0),
+                            const Text(
+                              'Alex sandro',
+                              style: TextStyle(
+                                  fontSize: 18.0, fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(height: 12.0),
+                            Row(
+                              children: List.generate(
+                                5,
+                                (index) => const Icon(
+                                  Icons.star,
+                                  color: Colors.yellow,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 12.0),
+                            const Text(
+                              '5 ဗူးကို ခဏလောက်သုံးပြီးရင် အသားအရေက အရမ်းကောင်းလာပြီး တစ်ကိုယ်လုံး သန်စွမ်းလာပါပြီ။ မျက်နှာ ဖြူ ပြာ မရှိတော့ဘူး။ HOGI MILK က တကယ်ကို အကြံပြုလိုပါတယ်။',
+                              style: TextStyle(
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w700,
+                                  height: 1.8),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                        decoration: BoxDecoration(
+                            border: const Border.fromBorderSide(
+                              BorderSide(
+                                color: Colors.green,
+                                width: 3.0,
+                                style: BorderStyle.solid,
+                              ),
+                            ),
+                            borderRadius: BorderRadius.circular(4)),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Image.asset(
+                              'assets/comment4.jpg',
+                              fit: BoxFit.cover,
+                            ),
+                            const SizedBox(height: 16.0),
+                            const Text(
+                              'Zar Lay',
+                              style: TextStyle(
+                                  fontSize: 18.0, fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(height: 12.0),
+                            Row(
+                              children: List.generate(
+                                5,
+                                (index) => const Icon(
+                                  Icons.star,
+                                  color: Colors.yellow,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 12.0),
+                            const Text(
+                              '3 ဗူးဝယ်ပြီး 1 ဗူးပဲကျန်တော့တာ တကယ်စိတ်ရှည်ဖို့ပဲလိုတာပါ။ အလယ်မှာသာသုံးရင် အလုပ်မဖြစ်ပါဘူး။',
+                              style: TextStyle(
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w700,
+                                  height: 1.8),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 // const MyForm(),
                 // Comments
                 Padding(

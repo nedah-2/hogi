@@ -9,13 +9,12 @@ class ImageOnlySlider extends StatelessWidget {
     CarouselController buttonCarouselController = CarouselController();
 
     final List<Widget> placeholders = [
-      Container(color: Colors.grey), // Placeholder 1
-      Container(color: Colors.blueGrey), // Placeholder 2
-      Container(color: Colors.black26), // Placeholder 3
-      Container(color: Colors.red), // Placeholder 4
-      Container(color: Colors.green), // Placeholder 5
-      Container(color: Colors.orange), // Placeholder 6
-      Container(color: Colors.purple), // Placeholder 7
+      Image.asset('assets/seed1.jpg', fit: BoxFit.cover),
+      Image.asset('assets/seed2.jpg', fit: BoxFit.cover),
+      Image.asset('assets/seed3.jpg', fit: BoxFit.cover),
+      Image.asset('assets/seed4.jpg', fit: BoxFit.cover),
+      Image.asset('assets/seed5.jpg', fit: BoxFit.cover),
+      Image.asset('assets/seed6.jpg', fit: BoxFit.cover),
       // Add more placeholder widgets as necessary
     ];
     return Padding(
@@ -40,7 +39,7 @@ class ImageOnlySlider extends StatelessWidget {
             options: CarouselOptions(
               autoPlay: true,
               enlargeCenterPage: true,
-              aspectRatio: 4 / 3, // Adjust aspect ratio
+              aspectRatio: 1, // Adjust aspect ratio
               viewportFraction: 1.0, // Show only one item at a time
             ),
           ),
