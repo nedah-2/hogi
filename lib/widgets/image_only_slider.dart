@@ -18,7 +18,7 @@ class ImageOnlySlider extends StatelessWidget {
       // Add more placeholder widgets as necessary
     ];
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 24.0),
+      padding: const EdgeInsets.only(bottom: 24.0),
       child: Stack(
         children: [
           CarouselSlider(
@@ -55,6 +55,7 @@ class ImageOnlySlider extends StatelessWidget {
                   IconButton(
                     icon: const Icon(
                       Icons.chevron_left,
+                      color: Colors.transparent,
                     ),
                     onPressed: () {
                       buttonCarouselController.previousPage(
@@ -65,6 +66,7 @@ class ImageOnlySlider extends StatelessWidget {
                   IconButton(
                     icon: const Icon(
                       Icons.chevron_right,
+                      color: Colors.transparent,
                     ),
                     onPressed: () {
                       buttonCarouselController.nextPage(

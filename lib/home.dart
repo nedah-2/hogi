@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hogi_milk/providers/data_provider.dart';
+
 import 'package:hogi_milk/widgets/custom_form.dart';
 import 'package:hogi_milk/widgets/image_only_slider.dart';
 import 'package:hogi_milk/widgets/image_slider.dart';
 import 'package:hogi_milk/widgets/review_slider.dart';
-import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -23,6 +22,7 @@ class HomeScreen extends StatelessWidget {
               children: <Widget>[
                 // Photo taking 70% of the height
                 // Photo taking 70% of the height
+
                 SizedBox(
                   width: double.infinity,
                   height: 500,
@@ -339,6 +339,86 @@ class HomeScreen extends StatelessWidget {
                 ),
                 // Promotion Image
                 Image.asset('assets/promote.jpg', fit: BoxFit.contain),
+                // Badges
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 32),
+                  child: Column(
+                    children: [
+                      const Text(
+                        'ကြီးမားသောမြှင့်တင်ရေး',
+                        style: TextStyle(
+                            fontSize: 28,
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 24),
+                      Image.asset('assets/badges.png', fit: BoxFit.cover)
+                    ],
+                  ),
+                ),
+                // Special Discounts
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    children: [
+                      Image.asset('assets/promo1.png', fit: BoxFit.cover),
+                      const SizedBox(height: 16),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 64,
+                        child: ElevatedButton(
+                            onPressed: () {},
+                            child: const Text(
+                              'မှာယူရန်နှိပ်ပါ',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            )),
+                      ),
+                      const SizedBox(height: 24),
+                      Image.asset('assets/promo2.png', fit: BoxFit.cover),
+                      const SizedBox(height: 16),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 64,
+                        child: ElevatedButton(
+                            onPressed: () {},
+                            child: const Text(
+                              'မှာယူရန်နှိပ်ပါ',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            )),
+                      ),
+                      const SizedBox(height: 24),
+                      Image.asset('assets/promo3.png', fit: BoxFit.cover),
+                      const SizedBox(height: 16),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 64,
+                        child: ElevatedButton(
+                            onPressed: () {},
+                            child: const Text(
+                              'မှာယူရန်နှိပ်ပါ',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            )),
+                      ),
+                      const SizedBox(height: 24),
+                      Image.asset('assets/promo4.png', fit: BoxFit.cover),
+                      const SizedBox(height: 16),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 64,
+                        child: ElevatedButton(
+                            onPressed: () {},
+                            child: const Text(
+                              'မှာယူရန်နှိပ်ပါ',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            )),
+                      ),
+                    ],
+                  ),
+                ),
                 // Warning
                 Padding(
                   padding: const EdgeInsets.all(24.0),
@@ -848,111 +928,100 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ]),
                 ),
-                // Image Only Slider
-                const ImageOnlySlider(),
-                // Warning
-                Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: 80,
-                    child: Image.asset('assets/alert.png'),
-                  ),
-                ),
                 Container(
-                  color: Colors.red,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-                  child: const Text(
-                    'ကုန်ပစ္စည်းအတုများ လက်ခံရရှိခြင်းမှ ရှောင်ကြဉ်ရန်၊ ကျေးဇူးပြု၍ ဘေလ်ပေါ်ရှိ ပေးပို့သူ အချက်အလက်ကို စစ်ဆေးပြီး ဓာတ်ပုံတွင် ပြထားသည့်အတိုင်း ပေးပို့သူ အချက်အလက်ဖြင့် မှန်ကန်သော မှာယူမှုကိုသာ လက်ခံပါ။',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        height: 1.8),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                // Post Address
-                Container(
-                  color: Colors.grey.shade200,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-                  child: const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'NINJA VAN',
+                  color: const Color.fromRGBO(220, 252, 202, 0.6),
+                  child: Column(children: [
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: const TextSpan(
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.underline,
+                          //height: 0
+                        ),
+                        children: [
+                          TextSpan(
+                            text: 'အမြင့်ဆုံးထိရောက်မှုဖြင့် ',
+                          ),
+                          TextSpan(
+                            text: 'HOGI ',
+                            style: TextStyle(color: Colors.red),
+                          ),
+                          TextSpan(
+                            text: 'ကိုအသုံးပြုနည်း',
+                          ),
+                        ],
+                      ),
+                    ),
+                    Image.asset('assets/how.png', fit: BoxFit.contain),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0, vertical: 16),
+                      child: RichText(
+                        text: const TextSpan(
                           style: TextStyle(
-                              fontSize: 40,
+                              color: Colors.black,
+                              fontSize: 14.0,
                               fontWeight: FontWeight.bold,
                               height: 0),
-                        ),
-                        Text(
-                          'AIRWAY BILL',
-                          style: TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.w300,
-                              height: 0),
-                        ),
-                        SizedBox(height: 32),
-                        Text(
-                          'FROM (SENDER)',
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.w300),
-                        ),
-                        SizedBox(height: 8),
-                        Row(
                           children: [
-                            Icon(
-                              Icons.person,
-                              size: 32,
+                            TextSpan(
+                              text: 'အသုံးပြုရန် လမ်းညွှန်ချက်များ-',
+                              style: TextStyle(color: Colors.red),
                             ),
-                            SizedBox(width: 12),
-                            Text(
-                              '9028841 - Mya Vina (CITY)',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            TextSpan(
+                              text:
+                                  '3-5 ဇွန်းကို 55-56 ဒီဂရီ မှည့် 150ml ဖြင့် ရောမွှေပါ။ 180ml လောက်ရအောင် မွှေပါ။',
                             ),
                           ],
                         ),
-                        SizedBox(height: 8),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.phone,
-                              size: 32,
-                            ),
-                            SizedBox(width: 12),
-                            Text(
-                              '959670477400',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
-                            ),
-                          ],
+                      ),
+                    ),
+                    Image.asset('assets/freq.png', fit: BoxFit.contain),
+                    const SizedBox(height: 32),
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: const TextSpan(
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 0, 161, 83),
                         ),
-                        SizedBox(height: 8),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.map,
-                              size: 32,
-                            ),
-                            SizedBox(width: 12),
-                            Text(
-                              'South Dagon',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
-                            ),
-                          ],
-                        ),
-                      ]),
+                        children: [
+                          TextSpan(
+                            text: 'FDA, GMP, ISO\n',
+                          ),
+                          TextSpan(
+                            text: 'မှ အပြည့်အဝထောက်ခံချက်',
+                            style: TextStyle(
+                                color: Colors
+                                    .black87), // Change the color of '၏ထိရောက်မှု'
+                          ),
+                        ],
+                      ),
+                    ),
+                    Image.asset('assets/fdaicons.png', fit: BoxFit.contain),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(56, 16, 56, 56),
+                      width: double.infinity,
+                      height: 56,
+                      child: ElevatedButton(
+                          onPressed: () {},
+                          child: const Text(
+                            'ယခုမှာယူပါ',
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          )),
+                    ),
+                  ]),
                 ),
-                // Order Form
-                const MyForm(),
+                // Image Only Slider
+                const ImageOnlySlider(),
                 // Top Comments
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 24.0),
+                  padding: const EdgeInsets.symmetric(vertical: 0.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -1151,16 +1220,116 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                // const MyForm(),
+                // Warning
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 80,
+                    child: Image.asset('assets/alert.png'),
+                  ),
+                ),
+                Container(
+                  color: Colors.red,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                  child: const Text(
+                    'ကုန်ပစ္စည်းအတုများ လက်ခံရရှိခြင်းမှ ရှောင်ကြဉ်ရန်၊ ကျေးဇူးပြု၍ ဘေလ်ပေါ်ရှိ ပေးပို့သူ အချက်အလက်ကို စစ်ဆေးပြီး ဓာတ်ပုံတွင် ပြထားသည့်အတိုင်း ပေးပို့သူ အချက်အလက်ဖြင့် မှန်ကန်သော မှာယူမှုကိုသာ လက်ခံပါ။',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        height: 1.8),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                // Post Address
+                Container(
+                  color: Colors.grey.shade200,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                  child: const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'NINJA VAN',
+                          style: TextStyle(
+                              fontSize: 40,
+                              fontWeight: FontWeight.bold,
+                              height: 0),
+                        ),
+                        Text(
+                          'AIRWAY BILL',
+                          style: TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.w300,
+                              height: 0),
+                        ),
+                        SizedBox(height: 32),
+                        Text(
+                          'FROM (SENDER)',
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.w300),
+                        ),
+                        SizedBox(height: 8),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.person,
+                              size: 32,
+                            ),
+                            SizedBox(width: 12),
+                            Text(
+                              '9028841 - Mya Vina (CITY)',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 8),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.phone,
+                              size: 32,
+                            ),
+                            SizedBox(width: 12),
+                            Text(
+                              '959670477400',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 8),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.map,
+                              size: 32,
+                            ),
+                            SizedBox(width: 12),
+                            Text(
+                              'South Dagon',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                          ],
+                        ),
+                      ]),
+                ),
+                // Order Form
+                const MyForm(),
                 // Comments
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
                         'အားလုံးမှတ်ချက်',
+                        textAlign: TextAlign.left,
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
@@ -1172,7 +1341,12 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           const Text(
                             'မှတ်ချက် ၆၇၆',
-                            style: TextStyle(fontWeight: FontWeight.w500),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600, fontSize: 14),
+                          ),
+                          const Text(
+                            'ဖြင့် စီစဉ်သည်။',
+                            style: TextStyle(fontSize: 12),
                           ),
                           Container(
                             padding: const EdgeInsets.symmetric(
@@ -1184,7 +1358,8 @@ class HomeScreen extends StatelessWidget {
                                     color: Colors.grey.shade300, width: 2)),
                             child: const Text(
                               'ဇာတ်လိုက်',
-                              style: TextStyle(fontWeight: FontWeight.w500),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600, fontSize: 14),
                             ),
                           ),
                         ],
