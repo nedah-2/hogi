@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hogi_milk/widgets/animated_avatar.dart';
+import 'package:hogi_milk/widgets/animated_button.dart';
 
 import 'package:hogi_milk/widgets/custom_form.dart';
 import 'package:hogi_milk/widgets/image_only_slider.dart';
@@ -6,13 +8,25 @@ import 'package:hogi_milk/widgets/image_slider.dart';
 import 'package:hogi_milk/widgets/review_slider.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+
+  final ScrollController _scrollController = ScrollController();
+
+  void scrollToForm() {
+    // Scroll to the position of the form widget
+    _scrollController.animateTo(
+      8404,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
+        controller: _scrollController,
         child: Center(
           child: Container(
             constraints: const BoxConstraints(
@@ -22,7 +36,6 @@ class HomeScreen extends StatelessWidget {
               children: <Widget>[
                 // Photo taking 70% of the height
                 // Photo taking 70% of the height
-
                 SizedBox(
                   width: double.infinity,
                   height: 500,
@@ -44,10 +57,13 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             Icon(Icons.check),
                             SizedBox(width: 8),
-                            Text(
-                              'အစာမစား၊ လေ့ကျင့်ခန်းမလုပ်၊ မောပန်းခြင်းမရှိ',
-                              style: TextStyle(
-                                  fontSize: 13.0, fontWeight: FontWeight.bold),
+                            Expanded(
+                              child: Text(
+                                'အစာမစား၊ လေ့ကျင့်ခန်းမလုပ်၊ မောပန်းခြင်းမရှိ',
+                                style: TextStyle(
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ],
                         ),
@@ -56,16 +72,18 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             Icon(Icons.check),
                             SizedBox(width: 8),
-                            Text(
-                              'ဘေးထွက်ဆိုးကျိုးလုံးဝမရှိဘဲ သဘာဝအတိုင်းပါပဲ။',
-                              style: TextStyle(
-                                  fontSize: 13.0, fontWeight: FontWeight.bold),
+                            Expanded(
+                              child: Text(
+                                'ဘေးထွက်ဆိုးကျိုးလုံးဝမရှိဘဲ သဘာဝအတိုင်းပါပဲ။',
+                                style: TextStyle(
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 16.0),
+                        const SizedBox(height: 24.0),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             SizedBox(
@@ -73,23 +91,53 @@ class HomeScreen extends StatelessWidget {
                               height: 48,
                               child: Image.asset("assets/gift-box.gif"),
                             ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 16, horizontal: 24)),
-                              onPressed: () {},
-                              child: const Text('50 % Discount'),
+                            const Spacer(),
+                            GradientButton(
+                              onPressed: scrollToForm,
+                              color1: Colors.yellow,
+                              color2: Colors.orange,
+                              buttonText: '50% လျှော့ဈေး',
+                              textColor: Colors.black,
+                              borderColor: Colors.black,
                             ),
+                            // ElevatedButton(
+                            //   style: ButtonStyle(
+                            //     backgroundColor: MaterialStateProperty.all<
+                            //             Color>(
+                            //         const Color.fromARGB(255, 255, 166, 33)),
+                            //     elevation: MaterialStateProperty.all(4),
+                            //     shape: MaterialStateProperty.all<
+                            //         RoundedRectangleBorder>(
+                            //       RoundedRectangleBorder(
+                            //         borderRadius: BorderRadius.circular(32.0),
+                            //         side: const BorderSide(
+                            //             color: Colors.black, width: 2),
+                            //       ),
+                            //     ),
+                            //     padding: MaterialStateProperty.all<
+                            //         EdgeInsetsGeometry>(
+                            //       const EdgeInsets.symmetric(
+                            //           vertical: 12, horizontal: 32),
+                            //     ),
+                            //   ),
+                            //   onPressed: scrollToForm,
+                            //   child: const Text(
+                            //     '50 % လျှော့ဈေး',
+                            //     style: TextStyle(
+                            //         color: Colors.black,
+                            //         fontSize: 18,
+                            //         fontWeight: FontWeight.bold),
+                            //   ),
+                            // ),
+                            const Spacer(),
+
                             Transform(
                               alignment: Alignment.center,
                               transform: Matrix4.identity()..scale(-1.0, 1.0),
                               child: SizedBox(
                                 width: 64,
                                 height: 48,
-                                child: Image.asset(
-                                  "assets/gift-box.gif",
-                                  fit: BoxFit.cover,
-                                ),
+                                child: Image.asset("assets/gift-box.gif"),
                               ),
                             ),
                           ],
@@ -226,15 +274,20 @@ class HomeScreen extends StatelessWidget {
                     child: Image.asset('assets/fda.jpg')),
                 // Call To Action Button
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 24),
+                  padding: const EdgeInsets.symmetric(vertical: 32),
                   alignment: Alignment.center,
-                  color: Colors.greenAccent.shade100,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 16, horizontal: 24)),
-                    onPressed: () {},
-                    child: const Text('50 % Discount'),
+                  color: const Color.fromRGBO(220, 252, 202, 0.6),
+                  child: SizedBox(
+                    width: 200,
+                    height: 56,
+                    child: GradientButton(
+                      onPressed: scrollToForm,
+                      color1: Colors.yellow,
+                      color2: Colors.orange,
+                      buttonText: '50% လျှော့ဈေး',
+                      textColor: Colors.black,
+                      borderColor: Colors.black,
+                    ),
                   ),
                 ),
                 // Another Image Carousel
@@ -360,65 +413,83 @@ class HomeScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset('assets/promo1.png', fit: BoxFit.cover),
-                      const SizedBox(height: 16),
-                      SizedBox(
-                        width: double.infinity,
-                        height: 64,
-                        child: ElevatedButton(
-                            onPressed: () {},
-                            child: const Text(
-                              'မှာယူရန်နှိပ်ပါ',
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            )),
+                      const SizedBox(height: 24),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                        child: SizedBox(
+                          width: double.infinity,
+                          height: 56,
+                          child: GradientButton(
+                            onPressed: scrollToForm,
+                            color1: Colors.red,
+                            color2: Colors.orange,
+                            buttonText: 'မှာယူရန်နှိပ်ပါ',
+                            textColor: Colors.white,
+                            borderColor: Colors.transparent,
+                          ),
+                        ),
                       ),
                       const SizedBox(height: 24),
                       Image.asset('assets/promo2.png', fit: BoxFit.cover),
-                      const SizedBox(height: 16),
-                      SizedBox(
-                        width: double.infinity,
-                        height: 64,
-                        child: ElevatedButton(
-                            onPressed: () {},
-                            child: const Text(
-                              'မှာယူရန်နှိပ်ပါ',
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            )),
+                      const SizedBox(height: 24),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                        child: SizedBox(
+                          width: double.infinity,
+                          height: 56,
+                          child: GradientButton(
+                            onPressed: scrollToForm,
+                            color1: Colors.red,
+                            color2: Colors.orange,
+                            buttonText: 'မှာယူရန်နှိပ်ပါ',
+                            textColor: Colors.white,
+                            borderColor: Colors.transparent,
+                          ),
+                        ),
                       ),
                       const SizedBox(height: 24),
                       Image.asset('assets/promo3.png', fit: BoxFit.cover),
-                      const SizedBox(height: 16),
-                      SizedBox(
-                        width: double.infinity,
-                        height: 64,
-                        child: ElevatedButton(
-                            onPressed: () {},
-                            child: const Text(
-                              'မှာယူရန်နှိပ်ပါ',
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            )),
+                      const SizedBox(height: 24),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                        child: SizedBox(
+                          width: double.infinity,
+                          height: 56,
+                          child: GradientButton(
+                            onPressed: scrollToForm,
+                            color1: Colors.red,
+                            color2: Colors.orange,
+                            buttonText: 'မှာယူရန်နှိပ်ပါ',
+                            textColor: Colors.white,
+                            borderColor: Colors.transparent,
+                          ),
+                        ),
                       ),
                       const SizedBox(height: 24),
                       Image.asset('assets/promo4.png', fit: BoxFit.cover),
-                      const SizedBox(height: 16),
-                      SizedBox(
-                        width: double.infinity,
-                        height: 64,
-                        child: ElevatedButton(
-                            onPressed: () {},
-                            child: const Text(
-                              'မှာယူရန်နှိပ်ပါ',
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            )),
+                      const SizedBox(height: 24),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                        child: SizedBox(
+                          width: double.infinity,
+                          height: 56,
+                          child: GradientButton(
+                            onPressed: scrollToForm,
+                            color1: Colors.red,
+                            color2: Colors.orange,
+                            buttonText: 'မှာယူရန်နှိပ်ပါ',
+                            textColor: Colors.white,
+                            borderColor: Colors.transparent,
+                          ),
+                        ),
                       ),
                     ],
                   ),
                 ),
+                const SizedBox(height: 16),
                 // Warning
                 Padding(
                   padding: const EdgeInsets.all(24.0),
@@ -443,86 +514,13 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 // Post Address
-                Container(
-                  color: Colors.grey.shade200,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-                  child: const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'NINJA VAN',
-                          style: TextStyle(
-                              fontSize: 40,
-                              fontWeight: FontWeight.bold,
-                              height: 0),
-                        ),
-                        Text(
-                          'AIRWAY BILL',
-                          style: TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.w300,
-                              height: 0),
-                        ),
-                        SizedBox(height: 32),
-                        Text(
-                          'FROM (SENDER)',
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.w300),
-                        ),
-                        SizedBox(height: 8),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.person,
-                              size: 32,
-                            ),
-                            SizedBox(width: 12),
-                            Text(
-                              '9028841 - Mya Vina (CITY)',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 8),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.phone,
-                              size: 32,
-                            ),
-                            SizedBox(width: 12),
-                            Text(
-                              '959670477400',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 8),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.map,
-                              size: 32,
-                            ),
-                            SizedBox(width: 12),
-                            Text(
-                              'South Dagon',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
-                            ),
-                          ],
-                        ),
-                      ]),
-                ),
+                Image.asset('assets/address.PNG', fit: BoxFit.contain),
                 // Order Form
                 const MyForm(),
                 Container(
                   padding: const EdgeInsets.symmetric(
                       vertical: 24.0, horizontal: 16),
-                  color: const Color.fromRGBO(220, 252, 202, 1),
+                  color: const Color.fromRGBO(220, 252, 202, 0.6),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -928,6 +926,188 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ]),
                 ),
+                // Lab Photos
+                Container(
+                  color: const Color.fromRGBO(220, 252, 202, 0.6),
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  child: Column(
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          'ခေတ်မီထုတ်လုပ်ရေးနည်းပညာသည် ကမ္ဘာပေါ်တွင် နံပါတ်တစ်ဖြစ်သည်။',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 440,
+                        child: Stack(
+                          children: [
+                            Positioned(
+                              top: 150,
+                              left: 112,
+                              child: SizedBox(
+                                width: 130,
+                                height: 178,
+                                child: Image.asset(
+                                  'assets/sample.png',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 8,
+                              left: 16,
+                              child: AnimatedGrowShrinkWidget(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        width: 4,
+                                        color: Colors.white,
+                                      )),
+                                  width: 154,
+                                  height: 154,
+                                  child: const CircleAvatar(
+                                    backgroundImage:
+                                        AssetImage('assets/lab1.jpg'),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 6,
+                              right: 16,
+                              child: AnimatedGrowShrinkWidget(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        width: 2,
+                                        color: Colors.white,
+                                      )),
+                                  width: 120,
+                                  height: 120,
+                                  child: const CircleAvatar(
+                                    backgroundImage:
+                                        AssetImage('assets/lab2.jpg'),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 176,
+                              left: 12,
+                              child: AnimatedGrowShrinkWidget(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        width: 2,
+                                        color: Colors.white,
+                                      )),
+                                  width: 92,
+                                  height: 92,
+                                  child: const CircleAvatar(
+                                    backgroundImage:
+                                        AssetImage('assets/lab5.jpg'),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 142,
+                              right: 4,
+                              child: AnimatedGrowShrinkWidget(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        width: 2,
+                                        color: Colors.white,
+                                      )),
+                                  width: 100,
+                                  height: 100,
+                                  child: const CircleAvatar(
+                                    backgroundImage:
+                                        AssetImage('assets/lab4.jpg'),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              left: 6,
+                              bottom: 10,
+                              child: AnimatedGrowShrinkWidget(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        width: 2,
+                                        color: Colors.white,
+                                      )),
+                                  width: 146,
+                                  height: 146,
+                                  child: const CircleAvatar(
+                                    backgroundImage:
+                                        AssetImage('assets/lab5.jpg'),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              left: 6,
+                              bottom: 12,
+                              child: AnimatedGrowShrinkWidget(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        width: 2,
+                                        color: Colors.white,
+                                      )),
+                                  width: 146,
+                                  height: 146,
+                                  child: const CircleAvatar(
+                                    backgroundImage:
+                                        AssetImage('assets/lab6.jpg'),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              right: -8,
+                              bottom: 24,
+                              child: AnimatedGrowShrinkWidget(
+                                child: Container(
+                                  width: 164,
+                                  height: 164,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        width: 2,
+                                        color: Colors.white,
+                                      )),
+                                  child: const CircleAvatar(
+                                    backgroundImage:
+                                        AssetImage('assets/lab3.jpg'),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                // How to make
                 Container(
                   color: const Color.fromRGBO(220, 252, 202, 0.6),
                   child: Column(children: [
@@ -981,6 +1161,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     Image.asset('assets/freq.png', fit: BoxFit.contain),
                     const SizedBox(height: 32),
+                    // FDA Badges
                     RichText(
                       textAlign: TextAlign.center,
                       text: const TextSpan(
@@ -1008,11 +1189,18 @@ class HomeScreen extends StatelessWidget {
                       width: double.infinity,
                       height: 56,
                       child: ElevatedButton(
-                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromARGB(255, 255, 33, 17),
+                            elevation: 8,
+                          ),
+                          onPressed: scrollToForm,
                           child: const Text(
                             'ယခုမှာယူပါ',
                             style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
                           )),
                     ),
                   ]),
@@ -1244,80 +1432,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 // Post Address
-                Container(
-                  color: Colors.grey.shade200,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-                  child: const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'NINJA VAN',
-                          style: TextStyle(
-                              fontSize: 40,
-                              fontWeight: FontWeight.bold,
-                              height: 0),
-                        ),
-                        Text(
-                          'AIRWAY BILL',
-                          style: TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.w300,
-                              height: 0),
-                        ),
-                        SizedBox(height: 32),
-                        Text(
-                          'FROM (SENDER)',
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.w300),
-                        ),
-                        SizedBox(height: 8),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.person,
-                              size: 32,
-                            ),
-                            SizedBox(width: 12),
-                            Text(
-                              '9028841 - Mya Vina (CITY)',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 8),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.phone,
-                              size: 32,
-                            ),
-                            SizedBox(width: 12),
-                            Text(
-                              '959670477400',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 8),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.map,
-                              size: 32,
-                            ),
-                            SizedBox(width: 12),
-                            Text(
-                              'South Dagon',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
-                            ),
-                          ],
-                        ),
-                      ]),
-                ),
+                Image.asset('assets/address.PNG', fit: BoxFit.contain),
                 // Order Form
                 const MyForm(),
                 // Comments
@@ -1374,18 +1489,22 @@ class HomeScreen extends StatelessWidget {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              width: 56.0,
-                              height: 56.0,
-                              decoration: BoxDecoration(
-                                color: Colors.grey, // Placeholder color
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              // Placeholder for user photo
-                              // You can replace this with your actual user photo widget
-                              child:
-                                  const Icon(Icons.person, color: Colors.white),
+                            const CircleAvatar(
+                              radius: 28,
+                              backgroundImage: AssetImage('assets/user1.jpg'),
                             ),
+                            // Container(
+                            //   width: 56.0,
+                            //   height: 56.0,
+                            //   decoration: BoxDecoration(
+                            //     color: Colors.grey, // Placeholder color
+                            //     borderRadius: BorderRadius.circular(8.0),
+                            //   ),
+                            //   // Placeholder for user photo
+                            //   // You can replace this with your actual user photo widget
+                            //   child:
+                            //       const Icon(Icons.person, color: Colors.white),
+                            // ),
                             const SizedBox(width: 12.0),
                             Expanded(
                               child: Column(
@@ -1474,26 +1593,32 @@ class HomeScreen extends StatelessWidget {
                                   const SizedBox(height: 16),
                                   Container(
                                     margin: const EdgeInsets.only(bottom: 16),
-                                    child: Row(
+                                    child: const Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Container(
-                                          width: 56.0,
-                                          height: 56.0,
-                                          decoration: BoxDecoration(
-                                            color: Colors
-                                                .grey, // Placeholder color
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                          ),
-                                          // Placeholder for user photo
-                                          // You can replace this with your actual user photo widget
-                                          child: const Icon(Icons.person,
-                                              color: Colors.white),
+                                        CircleAvatar(
+                                          radius: 28,
+                                          backgroundColor: Colors.white,
+                                          backgroundImage:
+                                              AssetImage('assets/profile.jpg'),
                                         ),
-                                        const SizedBox(width: 12.0),
-                                        const Expanded(
+                                        // Container(
+                                        //   width: 56.0,
+                                        //   height: 56.0,
+                                        //   decoration: BoxDecoration(
+                                        //     color: Colors
+                                        //         .grey, // Placeholder color
+                                        //     borderRadius:
+                                        //         BorderRadius.circular(8.0),
+                                        //   ),
+                                        //   // Placeholder for user photo
+                                        //   // You can replace this with your actual user photo widget
+                                        //   child: const Icon(Icons.person,
+                                        //       color: Colors.white),
+                                        // ),
+                                        SizedBox(width: 12.0),
+                                        Expanded(
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -1577,18 +1702,22 @@ class HomeScreen extends StatelessWidget {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              width: 56.0,
-                              height: 56.0,
-                              decoration: BoxDecoration(
-                                color: Colors.grey, // Placeholder color
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              // Placeholder for user photo
-                              // You can replace this with your actual user photo widget
-                              child:
-                                  const Icon(Icons.person, color: Colors.white),
+                            const CircleAvatar(
+                              radius: 28,
+                              backgroundImage: AssetImage('assets/user2.jpg'),
                             ),
+                            // Container(
+                            //   width: 56.0,
+                            //   height: 56.0,
+                            //   decoration: BoxDecoration(
+                            //     color: Colors.grey, // Placeholder color
+                            //     borderRadius: BorderRadius.circular(8.0),
+                            //   ),
+                            //   // Placeholder for user photo
+                            //   // You can replace this with your actual user photo widget
+                            //   child:
+                            //       const Icon(Icons.person, color: Colors.white),
+                            // ),
                             const SizedBox(width: 12.0),
                             Expanded(
                               child: Column(
@@ -1685,18 +1814,22 @@ class HomeScreen extends StatelessWidget {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              width: 56.0,
-                              height: 56.0,
-                              decoration: BoxDecoration(
-                                color: Colors.grey, // Placeholder color
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              // Placeholder for user photo
-                              // You can replace this with your actual user photo widget
-                              child:
-                                  const Icon(Icons.person, color: Colors.white),
+                            const CircleAvatar(
+                              radius: 28,
+                              backgroundImage: AssetImage('assets/user3.jpg'),
                             ),
+                            // Container(
+                            //   width: 56.0,
+                            //   height: 56.0,
+                            //   decoration: BoxDecoration(
+                            //     color: Colors.grey, // Placeholder color
+                            //     borderRadius: BorderRadius.circular(8.0),
+                            //   ),
+                            //   // Placeholder for user photo
+                            //   // You can replace this with your actual user photo widget
+                            //   child:
+                            //       const Icon(Icons.person, color: Colors.white),
+                            // ),
                             const SizedBox(width: 12.0),
                             Expanded(
                               child: Column(
@@ -1793,18 +1926,22 @@ class HomeScreen extends StatelessWidget {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              width: 56.0,
-                              height: 56.0,
-                              decoration: BoxDecoration(
-                                color: Colors.grey, // Placeholder color
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              // Placeholder for user photo
-                              // You can replace this with your actual user photo widget
-                              child:
-                                  const Icon(Icons.person, color: Colors.white),
+                            const CircleAvatar(
+                              radius: 28,
+                              backgroundImage: AssetImage('assets/user4.jpg'),
                             ),
+                            // Container(
+                            //   width: 56.0,
+                            //   height: 56.0,
+                            //   decoration: BoxDecoration(
+                            //     color: Colors.grey, // Placeholder color
+                            //     borderRadius: BorderRadius.circular(8.0),
+                            //   ),
+                            //   // Placeholder for user photo
+                            //   // You can replace this with your actual user photo widget
+                            //   child:
+                            //       const Icon(Icons.person, color: Colors.white),
+                            // ),
                             const SizedBox(width: 12.0),
                             Expanded(
                               child: Column(
@@ -1901,18 +2038,22 @@ class HomeScreen extends StatelessWidget {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              width: 56.0,
-                              height: 56.0,
-                              decoration: BoxDecoration(
-                                color: Colors.grey, // Placeholder color
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              // Placeholder for user photo
-                              // You can replace this with your actual user photo widget
-                              child:
-                                  const Icon(Icons.person, color: Colors.white),
+                            const CircleAvatar(
+                              radius: 28,
+                              backgroundImage: AssetImage('assets/user5.jpg'),
                             ),
+                            // Container(
+                            //   width: 56.0,
+                            //   height: 56.0,
+                            //   decoration: BoxDecoration(
+                            //     color: Colors.grey, // Placeholder color
+                            //     borderRadius: BorderRadius.circular(8.0),
+                            //   ),
+                            //   // Placeholder for user photo
+                            //   // You can replace this with your actual user photo widget
+                            //   child:
+                            //       const Icon(Icons.person, color: Colors.white),
+                            // ),
                             const SizedBox(width: 12.0),
                             Expanded(
                               child: Column(

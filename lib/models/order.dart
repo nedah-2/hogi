@@ -14,7 +14,7 @@ class Order {
     required this.count,
     required this.totalPrice,
     required this.date,
-    this.status = 'Pending',
+    this.status = 'Ordered',
   });
 
   Map<String, dynamic> toJson() {

@@ -78,7 +78,7 @@ class _MyFormState extends State<MyForm> {
     return Form(
       key: _formKey,
       child: Container(
-        color: const Color.fromARGB(255, 2, 128, 4),
+        color: const Color.fromRGBO(0, 128, 55, 1),
         padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,12 +115,14 @@ class _MyFormState extends State<MyForm> {
                 children: [
                   Icon(Icons.delivery_dining, color: Colors.white),
                   SizedBox(width: 12.0),
-                  Text(
-                    'အခမဲ့ပို့ဆောင်ခြင်းနှင့် COD',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.bold),
+                  Expanded(
+                    child: Text(
+                      'အခမဲ့ပို့ဆောင်ခြင်းနှင့် COD',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ],
               ),
@@ -246,6 +248,8 @@ class _MyFormState extends State<MyForm> {
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                    elevation: 8,
+                    backgroundColor: const Color.fromARGB(255, 255, 33, 17),
                     padding: const EdgeInsets.symmetric(
                         vertical: 16, horizontal: 40)),
                 onPressed: () async {
@@ -283,12 +287,15 @@ class _MyFormState extends State<MyForm> {
                         height: 20,
                         child: CircularProgressIndicator(
                           strokeWidth: 3,
+                          color: Colors.white,
                         ),
                       )
                     : const Text(
                         'မှာယူရန်နှိပ်ပါ',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, letterSpacing: 1),
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1,
+                            color: Colors.white),
                       ),
               ),
             ),
