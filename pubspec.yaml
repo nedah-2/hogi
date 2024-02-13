@@ -1,5 +1,5 @@
 name: hogi_milk
-description: "A new Flutter project."
+description: "HOGI MILK"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -44,6 +44,15 @@ dependencies:
   carousel_slider: ^4.2.1
   firebase_database: ^10.4.5
   provider: ^6.1.1
+  flutter_launcher_icons: "^0.13.1"
+  scrollable_positioned_list: ^0.3.8
+
+flutter_launcher_icons:
+  web:
+    generate: true
+    image_path: "assets/logo.png"
+    background_color: "#ffffff"
+    theme_color: "#38A05B"
 
 dev_dependencies:
   flutter_test:

@@ -14,11 +14,6 @@ void main() async {
   runApp(const MyApp());
 }
 
-// final statusColor = {
-//   'Pending': pendingColor,
-//   'Cancelled': dangerColor,
-//   'Confirmed': successColor
-// };
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -31,7 +26,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => DataManager()),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'HOGI',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,

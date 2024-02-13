@@ -88,7 +88,7 @@ class _MyFormState extends State<MyForm> {
               children: [
                 RichText(
                   text: const TextSpan(
-                    style: TextStyle(fontSize: 17.0, color: Colors.black),
+                    style: TextStyle(fontSize: 17.0, color: Colors.black,height: 2),
                     children: <TextSpan>[
                       TextSpan(
                         text: 'ယခုမှာယူပါ။\n',
