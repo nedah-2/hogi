@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hogi_milk/providers/data_provider.dart';
 import 'package:hogi_milk/widgets/animated_avatar.dart';
 import 'package:hogi_milk/widgets/animated_button.dart';
 
@@ -6,6 +7,7 @@ import 'package:hogi_milk/widgets/custom_form.dart';
 import 'package:hogi_milk/widgets/image_only_slider.dart';
 import 'package:hogi_milk/widgets/image_slider.dart';
 import 'package:hogi_milk/widgets/review_slider.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -23,6 +25,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dataManager = Provider.of<DataManager>(context, listen: true);
+    final Map images = dataManager.images;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -36,14 +40,24 @@ class HomeScreen extends StatelessWidget {
               children: <Widget>[
                 // Photo taking 70% of the height
                 // Photo taking 70% of the height
-                SizedBox(
-                  width: double.infinity,
-                  height: 500,
-                  child: Image.asset(
-                    'assets/image1.jpg',
-                    fit: BoxFit.cover,
-                  ),
+                Consumer<DataManager>(
+                  builder: (context, data, child) {
+                    if (data.images.isEmpty) {
+                      return Container(
+                          height: 500, color: Colors.grey.shade100);
+                    }
+                    // Use yourProvider to access the data or methods provided by your provider
+                    return SizedBox(
+                      width: double.infinity,
+                      height: 500,
+                      child: Image.network(
+                        images['img1'],
+                        fit: BoxFit.cover,
+                      ),
+                    );
+                  },
                 ),
+
                 // // Two descriptions and call to action taking 30% of the height
                 Center(
                   child: Container(
@@ -391,7 +405,12 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 // Promotion Image
-                Image.asset('assets/promote.jpg', fit: BoxFit.contain),
+                Consumer<DataManager>(builder: (context, data, child) {
+                  if (data.images.isEmpty) {
+                    return Container(height: 300, color: Colors.grey.shade300);
+                  }
+                  return Image.network(images['img2'], fit: BoxFit.contain);
+                }),
                 // Badges
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 32),
@@ -643,10 +662,10 @@ class HomeScreen extends StatelessWidget {
                                   child: RichText(
                                     text: const TextSpan(
                                       style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 13.0,
-                                          fontWeight: FontWeight.bold,
-                                          height: 0),
+                                        color: Colors.black,
+                                        fontSize: 13.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                       children: [
                                         TextSpan(
                                           text: 'US မှ 100% Colostrum ',
@@ -675,10 +694,10 @@ class HomeScreen extends StatelessWidget {
                                   child: RichText(
                                     text: const TextSpan(
                                       style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 13.0,
-                                          fontWeight: FontWeight.bold,
-                                          height: 0),
+                                        color: Colors.black,
+                                        fontSize: 13.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                       children: [
                                         TextSpan(
                                           text:
@@ -709,10 +728,10 @@ class HomeScreen extends StatelessWidget {
                                   child: RichText(
                                     text: const TextSpan(
                                       style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 13.0,
-                                          fontWeight: FontWeight.bold,
-                                          height: 0),
+                                        color: Colors.black,
+                                        fontSize: 13.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                       children: [
                                         TextSpan(
                                           text: 'အမေရိက၏ ထိပ်တန်း ',
@@ -753,7 +772,6 @@ class HomeScreen extends StatelessWidget {
                             color: Colors.black,
                             fontSize: 24.0,
                             fontWeight: FontWeight.bold,
-                            height: 0,
                           ),
                           children: [
                             TextSpan(

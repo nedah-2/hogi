@@ -34,7 +34,7 @@ class _GradientButtonState extends State<GradientButton>
       vsync: this,
       duration: const Duration(milliseconds: 600),
     )..repeat(reverse: true);
-    _animation = Tween<double>(begin: 1.0, end: 1.2).animate(_controller);
+    _animation = Tween<double>(begin: 1.0, end: 1.05).animate(_controller);
   }
 
   @override
@@ -44,7 +44,8 @@ class _GradientButtonState extends State<GradientButton>
       builder: (context, child) {
         return Transform.scale(
           scale: _animation.value,
-          child: GestureDetector(
+          child: InkWell(
+            borderRadius: BorderRadius.circular(32),
             onTap: widget.onPressed,
             child: Container(
               alignment: Alignment.center,

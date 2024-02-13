@@ -8,32 +8,34 @@ class FirebaseService {
   final FirebaseDatabase _database = FirebaseDatabase.instance;
   final NotificationServices _notificationService = NotificationServices();
 
-  Future<Map<String, dynamic>> getImages() async {
-    return {'img1': 'url1', 'img2': 'url2'};
-    // try {
-    //   final snapshot = await _database.ref('images').get();
-    //   final data = snapshot.value as Map<String, dynamic>;
-    //   print(data);
-    //   return data;
-    // } catch (e) {
-    //   debugPrint('Error fetching images: $e');
-    //   return {};
-    // }
+  Future<Map> getImages() async {
+    try {
+      final snapshot = await _database.ref('images').get();
+      if (snapshot.exists) {
+        final data = snapshot.value as Map;
+        return data;
+      } else {
+        // Handle case when 'images' node does not exist or is empty
+        return {};
+      }
+    } catch (e) {
+      debugPrint('Error fetching images: $e');
+      return {};
+    }
   }
 
   Future<List<Option>> getOptions() async {
     try {
-      List<Option> options = [
-        Option(count: 2, price: 80000),
-        Option(count: 3, price: 72000),
-        Option(count: 4, price: 64000),
-      ];
-      // final snapshot = await _database.ref('options').get();
-      // final data = snapshot.value as List<dynamic>;
-      // for (var value in data) {
-      //   print(value);
-      //   options.add(Option.fromJson(value));
-      // }
+      List<Option> options = [];
+      final snapshot = await _database.ref('options').get();
+      if (snapshot.exists) {
+        final data = snapshot.value as List;
+        for (var value in data) {
+          if (value != null) {
+            options.add(Option.fromJson(value));
+          }
+        }
+      }
       return options;
     } catch (e) {
       debugPrint('Error fetching options: $e');

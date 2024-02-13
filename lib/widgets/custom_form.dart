@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hogi_milk/models/order.dart';
 import 'package:hogi_milk/models/option.dart';
 import 'package:hogi_milk/providers/data_provider.dart';
+import 'package:hogi_milk/widgets/bouncing_widget.dart';
 import 'package:provider/provider.dart';
 
 class MyForm extends StatefulWidget {
@@ -83,25 +84,35 @@ class _MyFormState extends State<MyForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            RichText(
-              text: const TextSpan(
-                style: TextStyle(fontSize: 18.0, color: Colors.black),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: 'ယခုမှာယူပါ။\n',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.yellow),
+            Row(
+              children: [
+                RichText(
+                  text: const TextSpan(
+                    style: TextStyle(fontSize: 17.0, color: Colors.black),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: 'ယခုမှာယူပါ။\n',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.yellow),
+                      ),
+                      TextSpan(
+                        text: 'မှာယူလိုပါက အောက်\n',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      TextSpan(
+                        text: 'ပါဖောင်ကိုဖြည့်ပါ။',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ),
-                  TextSpan(
-                    text: 'မှာယူလိုပါက အောက်\n',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  TextSpan(
-                    text: 'ပါဖောင်ကိုဖြည့်ပါ။',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
+                ),
+                const SizedBox(width: 24),
+                Expanded(
+                  child: BouncingWidget(
+                      child:
+                          Image.asset('assets/flash.png', fit: BoxFit.cover)),
+                ),
+              ],
             ),
             Container(
               padding: const EdgeInsets.all(16),

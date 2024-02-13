@@ -8,7 +8,7 @@ class Option {
     return {'count': count, 'price': price};
   }
 
-  factory Option.fromJson(Map<String, dynamic> json) {
+  factory Option.fromJson(Map json) {
     return Option(count: json['count'], price: json['price']);
   }
 }
