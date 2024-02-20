@@ -4,6 +4,7 @@ import 'package:hogi_milk/widgets/animated_avatar.dart';
 import 'package:hogi_milk/widgets/animated_button.dart';
 
 import 'package:hogi_milk/widgets/custom_form.dart';
+import 'package:hogi_milk/widgets/hero_image.dart';
 import 'package:hogi_milk/widgets/image_only_slider.dart';
 import 'package:hogi_milk/widgets/image_slider.dart';
 import 'package:hogi_milk/widgets/review_slider.dart';
@@ -14,44 +15,35 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
   final ItemScrollController itemScrollController = ItemScrollController();
-  final ScrollOffsetController scrollOffsetController = ScrollOffsetController();
-  final ItemPositionsListener itemPositionsListener = ItemPositionsListener.create();
-  final ScrollOffsetListener scrollOffsetListener = ScrollOffsetListener.create();
+
+  final ScrollOffsetController scrollOffsetController =
+      ScrollOffsetController();
+
+  final ItemPositionsListener itemPositionsListener =
+      ItemPositionsListener.create();
+
+  final ScrollOffsetListener scrollOffsetListener =
+      ScrollOffsetListener.create();
 
   void scrollToForm() {
     // Scroll to the position of the form widget
     itemScrollController.scrollTo(
         index: 17,
         curve: Curves.easeInOut,
-        duration: const Duration(milliseconds: 500)
-    );
+        duration: const Duration(milliseconds: 1000));
   }
 
   @override
   Widget build(BuildContext context) {
     final dataManager = Provider.of<DataManager>(context, listen: true);
     final Map images = dataManager.images;
+    final width = MediaQuery.of(context).size.width;
+    final maxWidth = width > 560 ? 400.0 : double.infinity;
+
     List<Widget> widgets = [
       // Photo taking 70% of the height
       // Photo taking 70% of the height
-      Consumer<DataManager>(
-        builder: (context, data, child) {
-          if (data.images.isEmpty) {
-            return Container(
-                height: 500, color: Colors.grey.shade100);
-          }
-          // Use yourProvider to access the data or methods provided by your provider
-          return SizedBox(
-            width: double.infinity,
-            height: 500,
-            child: Image.network(
-              images['img1'],
-              fit: BoxFit.cover,
-            ),
-          );
-        },
-      ),
-
+      const HeroImage(),
       // // Two descriptions and call to action taking 30% of the height
       Center(
         child: Container(
@@ -69,8 +61,7 @@ class HomeScreen extends StatelessWidget {
                     child: Text(
                       'အစာမစား၊ လေ့ကျင့်ခန်းမလုပ်၊ မောပန်းခြင်းမရှိ',
                       style: TextStyle(
-                          fontSize: 13.0,
-                          fontWeight: FontWeight.bold),
+                          fontSize: 13.0, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
@@ -84,8 +75,7 @@ class HomeScreen extends StatelessWidget {
                     child: Text(
                       'ဘေးထွက်ဆိုးကျိုးလုံးဝမရှိဘဲ သဘာဝအတိုင်းပါပဲ။',
                       style: TextStyle(
-                          fontSize: 13.0,
-                          fontWeight: FontWeight.bold),
+                          fontSize: 13.0, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
@@ -155,11 +145,13 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       //Doctor's Advice
-      const Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Text(
-          "ဆရာဝန်၏အကြံဉာဏ်",
-          style: TextStyle(fontWeight: FontWeight.bold),
+      const Center(
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 16),
+          child: Text(
+            "ဆရာဝန်၏အကြံဉာဏ်",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          ),
         ),
       ),
       Stack(
@@ -175,13 +167,12 @@ class HomeScreen extends StatelessWidget {
               children: [
                 Text(
                   'WHO မှ Dr. Melissa',
-                  style: TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 16),
                 Text(
                   "Hogi MILK သည် အမေရိကန်ပြည်ထောင်စုမှ သီးနှံအစေ့အဆန်များ၊ သဘာဝပါဝင်ပစ္စည်းများမှ အဆင့်မြင့် NANO ကောက်နှံများကို ခွဲထုတ်သည့်နည်းပညာဖြင့် ထုတ်လုပ်ထားသော နို့ထွက်ပစ္စည်းဖြစ်ပြီး ပါဝင်ပစ္စည်းများတွင်ပါရှိသော အနှစ်သာရများကို ထိန်းသိမ်းပေးကာ အဆိုပါ အနှစ်သာရများကို မှန်ကန်သော ဦးတည်ရာသို့ ပို့ဆောင်ပေးကာ အကောင်းဆုံးထိရောက်မှုကို ယူဆောင်လာပေးပါသည်။ စျေးကွက်တွင် သမားရိုးကျ ခံတွင်းထုတ်ကုန်များထက် ထို့အပြင် Hogi Milk ထုတ်ကုန်များသည် သောက်သုံးရေတွင် လွယ်ကူစွာ ပျော်ဝင်နိုင်သောကြောင့် အာနိသင်ထက် အဆများစွာ ပိုမြန်စေပြီး ဝမ်းဗိုက်၊ ဝမ်းဗိုက်၊ ခြေသလုံး၊ ခြေသလုံးကြွက်သားများနှင့် ခါးရှိ အဆီပိုများကို ဖယ်ရှားပေးပါသည်။ အဘယ်ကြောင့်ဆိုသော် Hogi Milk သည် FDA မှ ထောက်ခံချက်ရရှိထားသောကြောင့်ဖြစ်သည်။\n"
-                      "\nHogi Milk တွင် အလွန်နူးညံ့သိမ်မွေ့သော သဘာဝပါဝင်ပစ္စည်းများဖြစ်သည့် Almonds၊ walnuts၊ hazelnuts၊ သီဟိုဠ်စေ့၊ chia အစေ့များ၊ ပြောင်းဖူးစေ့များ၊ oats၊ Hachiစေ့များ၊ ပဲပိစပ်နှင့် ကောက်နှံလုံးညို၊ သက်သတ်လွတ်ခေါက်ဆွဲနှင့် အခြားအရေးကြီးသော အာဟာရတစ်မျိုးဖြစ်သည်။ ဤအရာများသည် ခန္ဓာကိုယ်ကျန်းမာ ၊ ဘေးကင်းရန် ၊ ဘေးထွက်ဆိုးကျိုးမရှိဘဲ နှင့် စျေးကြီးသော ခွဲစိတ်မှုမရှိဘဲ လှပသောခန္ဓာကိုယ်ကို ပိုင်ဆိုင်ရန် ကူညီပေးသော ပါဝင်ပစ္စည်းများဖြစ်သည်။ အပြုသဘောဆောင်သောတုံ့ပြန်ချက်စာရင်းဇယားများအရ၊ ပျမ်းမျှအားဖြင့် 3 ပတ်လျှင် hogi နို့ 3 ဗူးမှ 5 ဗူးကိုအသုံးပြုသောဖောက်သည်များသည် 5-10 ကီလိုဂရမ်ဆုံးရှုံးလိမ့်မည်၊ အထူးသဖြင့်ကိုယ်အလေးချိန်ပြန်မတက်လာသောကြောင့်အမေရိကန်၊ ကနေဒါရှိဖောက်သည်သန်းပေါင်းများစွာသည်အမေရိကန်၊ ၊ဂျပန် ၊ကိုရီးယား ၊မလေးရှား ... ယုံကြည်စိတ်ချစွာ အသုံးပြုနိုင်ပါသည် ။ WHO စံချိန်စံညွှန်းများနှင့် နိုင်ငံတကာကျွမ်းကျင်သူတစ်ဦးအနေဖြင့် ကျွန်ုပ်သည် Hgoi နို့ထွက်ပစ္စည်းများကို ပြီးပြည့်စုံသော ခန္ဓာကိုယ်ပုံသဏ္ဍာန်နှင့် ကျန်းမာရေးကောင်းမွန်ရန်အတွက် ယခုအသုံးပြုပါဟု အကြံပြုအပ်ပါသည်။",
+                  "\nHogi Milk တွင် အလွန်နူးညံ့သိမ်မွေ့သော သဘာဝပါဝင်ပစ္စည်းများဖြစ်သည့် Almonds၊ walnuts၊ hazelnuts၊ သီဟိုဠ်စေ့၊ chia အစေ့များ၊ ပြောင်းဖူးစေ့များ၊ oats၊ Hachiစေ့များ၊ ပဲပိစပ်နှင့် ကောက်နှံလုံးညို၊ သက်သတ်လွတ်ခေါက်ဆွဲနှင့် အခြားအရေးကြီးသော အာဟာရတစ်မျိုးဖြစ်သည်။ ဤအရာများသည် ခန္ဓာကိုယ်ကျန်းမာ ၊ ဘေးကင်းရန် ၊ ဘေးထွက်ဆိုးကျိုးမရှိဘဲ နှင့် စျေးကြီးသော ခွဲစိတ်မှုမရှိဘဲ လှပသောခန္ဓာကိုယ်ကို ပိုင်ဆိုင်ရန် ကူညီပေးသော ပါဝင်ပစ္စည်းများဖြစ်သည်။ အပြုသဘောဆောင်သောတုံ့ပြန်ချက်စာရင်းဇယားများအရ၊ ပျမ်းမျှအားဖြင့် 3 ပတ်လျှင် hogi နို့ 3 ဗူးမှ 5 ဗူးကိုအသုံးပြုသောဖောက်သည်များသည် 5-10 ကီလိုဂရမ်ဆုံးရှုံးလိမ့်မည်၊ အထူးသဖြင့်ကိုယ်အလေးချိန်ပြန်မတက်လာသောကြောင့်အမေရိကန်၊ ကနေဒါရှိဖောက်သည်သန်းပေါင်းများစွာသည်အမေရိကန်၊ ၊ဂျပန် ၊ကိုရီးယား ၊မလေးရှား ... ယုံကြည်စိတ်ချစွာ အသုံးပြုနိုင်ပါသည် ။ WHO စံချိန်စံညွှန်းများနှင့် နိုင်ငံတကာကျွမ်းကျင်သူတစ်ဦးအနေဖြင့် ကျွန်ုပ်သည် Hgoi နို့ထွက်ပစ္စည်းများကို ပြီးပြည့်စုံသော ခန္ဓာကိုယ်ပုံသဏ္ဍာန်နှင့် ကျန်းမာရေးကောင်းမွန်ရန်အတွက် ယခုအသုံးပြုပါဟု အကြံပြုအပ်ပါသည်။",
                   style: TextStyle(height: 1.8),
                 ),
               ],
@@ -217,8 +208,7 @@ class HomeScreen extends StatelessWidget {
                   TextSpan(
                     text: 'HOGI ',
                     style: TextStyle(
-                        color:
-                        Colors.red), // Change the color of 'HOGI'
+                        color: Colors.red), // Change the color of 'HOGI'
                   ),
                   TextSpan(
                     text: '၏ထိရောက်မှု',
@@ -261,7 +251,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   TextSpan(
                     text:
-                    'FDA', // Remain the same color as the default text color
+                        'FDA', // Remain the same color as the default text color
                     style: TextStyle(color: Colors.green),
                   ),
                   TextSpan(
@@ -323,8 +313,7 @@ class HomeScreen extends StatelessWidget {
             fit: BoxFit.contain,
           ),
           const Padding(
-            padding:
-            EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+            padding: EdgeInsets.symmetric(vertical: 16, horizontal: 8),
             child: Column(children: [
               Text('ခန္ဓာကိုယ်က အမြဲတမ်း ကျန်းမာတယ်။',
                   textAlign: TextAlign.center,
@@ -338,8 +327,7 @@ class HomeScreen extends StatelessWidget {
             ]),
           ),
           const Padding(
-            padding:
-            EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+            padding: EdgeInsets.symmetric(vertical: 16, horizontal: 8),
             child: Column(children: [
               Text('အစာရှောင်ခြင်း၊ အစာစားခြင်းအား နှုတ်ဆက်ပါ။',
                   textAlign: TextAlign.center,
@@ -353,11 +341,9 @@ class HomeScreen extends StatelessWidget {
             ]),
           ),
           const Padding(
-            padding:
-            EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+            padding: EdgeInsets.symmetric(vertical: 16, horizontal: 8),
             child: Column(children: [
-              Text(
-                  'ပိုကောင်းတဲ့ဇီဝဖြစ်စဉ်။ ပိုကောင်းတဲ့အာဟာရစုပ်ယူမှု။',
+              Text('ပိုကောင်းတဲ့ဇီဝဖြစ်စဉ်။ ပိုကောင်းတဲ့အာဟာရစုပ်ယူမှု။',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontWeight: FontWeight.bold)),
               SizedBox(height: 12),
@@ -380,8 +366,7 @@ class HomeScreen extends StatelessWidget {
               child: Text(
                 'အသားအရေကို ဖြူဝင်းစေပြီး \nအသားအရေကို ချောမွေ့စေပါသည်။',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold, fontSize: 20),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
             ),
             Image.asset(
@@ -413,9 +398,7 @@ class HomeScreen extends StatelessWidget {
             const Text(
               'ကြီးမားသောမြှင့်တင်ရေး',
               style: TextStyle(
-                  fontSize: 28,
-                  color: Colors.red,
-                  fontWeight: FontWeight.bold),
+                  fontSize: 28, color: Colors.red, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 24),
             Image.asset('assets/badges.png', fit: BoxFit.cover)
@@ -514,8 +497,7 @@ class HomeScreen extends StatelessWidget {
       ),
       Container(
         color: Colors.red,
-        padding:
-        const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
         child: const Text(
           'ကုန်ပစ္စည်းအတုများ လက်ခံရရှိခြင်းမှ ရှောင်ကြဉ်ရန်၊ ကျေးဇူးပြု၍ ဘေလ်ပေါ်ရှိ ပေးပို့သူ အချက်အလက်ကို စစ်ဆေးပြီး ဓာတ်ပုံတွင် ပြထားသည့်အတိုင်း ပေးပို့သူ အချက်အလက်ဖြင့် မှန်ကန်သော မှာယူမှုကိုသာ လက်ခံပါ။',
           style: TextStyle(
@@ -531,8 +513,7 @@ class HomeScreen extends StatelessWidget {
       // Order Form
       const MyForm(),
       Container(
-        padding: const EdgeInsets.symmetric(
-            vertical: 24.0, horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 16),
         color: const Color.fromRGBO(220, 252, 202, 0.6),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -640,8 +621,7 @@ class HomeScreen extends StatelessWidget {
           children: [
             Image.asset('assets/advantage.jpg', fit: BoxFit.cover),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 8, vertical: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               child: Column(
                 children: [
                   Row(
@@ -659,6 +639,7 @@ class HomeScreen extends StatelessWidget {
                               color: Colors.black,
                               fontSize: 13.0,
                               fontWeight: FontWeight.bold,
+                              height: 1.8,
                             ),
                             children: [
                               TextSpan(
@@ -667,7 +648,7 @@ class HomeScreen extends StatelessWidget {
                               ),
                               TextSpan(
                                 text:
-                                'Hogi နည်းပညာမြင့်နို့ရည်သည် ၎င်း၏ထိရောက်မှု၊ ဘေးကင်းမှု၊ နူးညံ့သိမ်မွေ့မှုနှင့် ဘေးထွက်ဆိုးကျိုးမရှိသောကြောင့် အဝလွန်လူနာများအတွက် နံပါတ် ၁ အာဟာရကုထုံးဖြစ်သည်။',
+                                    'Hogi နည်းပညာမြင့်နို့ရည်သည် ၎င်း၏ထိရောက်မှု၊ ဘေးကင်းမှု၊ နူးညံ့သိမ်မွေ့မှုနှင့် ဘေးထွက်ဆိုးကျိုးမရှိသောကြောင့် အဝလွန်လူနာများအတွက် နံပါတ် ၁ အာဟာရကုထုံးဖြစ်သည်။',
                               ),
                             ],
                           ),
@@ -691,16 +672,17 @@ class HomeScreen extends StatelessWidget {
                               color: Colors.black,
                               fontSize: 13.0,
                               fontWeight: FontWeight.bold,
+                              height: 1.8,
                             ),
                             children: [
                               TextSpan(
                                 text:
-                                'Hogi သည် ခန္ဓာကိုယ်အတွက် 100% အာဟာရဓာတ်များ ပါ၀င်သည် ။ ',
+                                    'Hogi သည် ခန္ဓာကိုယ်အတွက် 100% အာဟာရဓာတ်များ ပါ၀င်သည် ။ ',
                                 style: TextStyle(color: Colors.red),
                               ),
                               TextSpan(
                                 text:
-                                'ဆန်အနှစ်၊ ပဲညွှန့်မှုန့်၊ ပြောင်းဖူးကစီဓာတ်၊ ဆန်လုံးညို၊ ဂျုံလုံး၊ ပဲပင်ပေါက်၊ ပဲပင်ပေါက်၊ chia စေ့များ၊ ဆာချီစေ့များ၊ ဖွဲနုဓာတ်၊ သတ္တုဓာတ်နှင့် အက်ဆစ်.',
+                                    'ဆန်အနှစ်၊ ပဲညွှန့်မှုန့်၊ ပြောင်းဖူးကစီဓာတ်၊ ဆန်လုံးညို၊ ဂျုံလုံး၊ ပဲပင်ပေါက်၊ ပဲပင်ပေါက်၊ chia စေ့များ၊ ဆာချီစေ့များ၊ ဖွဲနုဓာတ်၊ သတ္တုဓာတ်နှင့် အက်ဆစ်.',
                                 style: TextStyle(color: Colors.black),
                               ),
                             ],
@@ -725,6 +707,7 @@ class HomeScreen extends StatelessWidget {
                               color: Colors.black,
                               fontSize: 13.0,
                               fontWeight: FontWeight.bold,
+                              height: 1.8,
                             ),
                             children: [
                               TextSpan(
@@ -737,7 +720,7 @@ class HomeScreen extends StatelessWidget {
                               ),
                               TextSpan(
                                 text:
-                                'နည်းပညာသည် ပျက်စီးနေသော ကိုယ်တွင်းအင်္ဂါများကို ပြန်လည်ထူထောင်ရန်နှင့် အင်ဆူလင်ထုတ်လုပ်မှုကို ပြင်းထန်စွာ လှုံ့ဆော်ပေးနိုင်စွမ်းရှိသည်။',
+                                    'နည်းပညာသည် ပျက်စီးနေသော ကိုယ်တွင်းအင်္ဂါများကို ပြန်လည်ထူထောင်ရန်နှင့် အင်ဆူလင်ထုတ်လုပ်မှုကို ပြင်းထန်စွာ လှုံ့ဆော်ပေးနိုင်စွမ်းရှိသည်။',
                                 style: TextStyle(color: Colors.black),
                               ),
                             ],
@@ -754,8 +737,7 @@ class HomeScreen extends StatelessWidget {
       ),
       Container(
         color: const Color.fromRGBO(220, 252, 202, 0.6),
-        padding:
-        const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
         child: Column(children: [
           Padding(
             padding: const EdgeInsets.only(bottom: 16.0),
@@ -766,6 +748,7 @@ class HomeScreen extends StatelessWidget {
                   color: Colors.black,
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
+                  height: 2,
                 ),
                 children: [
                   TextSpan(
@@ -782,8 +765,7 @@ class HomeScreen extends StatelessWidget {
           ),
           Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: Colors.white),
+                borderRadius: BorderRadius.circular(8), color: Colors.white),
             padding: const EdgeInsets.all(16),
             margin: const EdgeInsets.symmetric(vertical: 16),
             child: Row(
@@ -795,8 +777,7 @@ class HomeScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: const Color.fromRGBO(28, 0, 194, 1),
                       border: Border.all(
-                          width: 4,
-                          color: Colors.white.withOpacity(0.5)),
+                          width: 4, color: Colors.white.withOpacity(0.5)),
                       shape: BoxShape.circle),
                   child: const Text(
                     '၁ပတ်',
@@ -814,7 +795,7 @@ class HomeScreen extends StatelessWidget {
                           color: Colors.black,
                           fontSize: 13.0,
                           fontWeight: FontWeight.bold,
-                          height: 0),
+                          height: 1.5),
                       children: [
                         TextSpan(
                           text: '1-2 ကီလိုဂရမ်ဆုံးရှုံးသည်: \n',
@@ -822,7 +803,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         TextSpan(
                           text:
-                          'အစားအစာအစားထိုး၊ ကျန်းမာရေးဖြည့်စွက်မှု၊ စွမ်းအင်ထောက်ပံ့မှု',
+                              'အစားအစာအစားထိုး၊ ကျန်းမာရေးဖြည့်စွက်မှု၊ စွမ်းအင်ထောက်ပံ့မှု',
                           style: TextStyle(color: Colors.black),
                         ),
                       ],
@@ -834,8 +815,7 @@ class HomeScreen extends StatelessWidget {
           ),
           Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: Colors.white),
+                borderRadius: BorderRadius.circular(8), color: Colors.white),
             padding: const EdgeInsets.all(16),
             margin: const EdgeInsets.symmetric(vertical: 16),
             child: Row(
@@ -847,8 +827,7 @@ class HomeScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: const Color.fromRGBO(28, 0, 194, 1),
                       border: Border.all(
-                          width: 4,
-                          color: Colors.white.withOpacity(0.5)),
+                          width: 4, color: Colors.white.withOpacity(0.5)),
                       shape: BoxShape.circle),
                   child: const Text(
                     '၂ပတ်',
@@ -866,7 +845,7 @@ class HomeScreen extends StatelessWidget {
                           color: Colors.black,
                           fontSize: 13.0,
                           fontWeight: FontWeight.bold,
-                          height: 0),
+                          height: 1.5),
                       children: [
                         TextSpan(
                           text: '2 ပတ် 3-4 ကီလိုဂရမ်ဆုံးရှုံးသည်: \n',
@@ -874,7 +853,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         TextSpan(
                           text:
-                          'ဗီတာမင်နှင့် သတ္တုဓာတ်များဖြင့် ခိုင်ခံ့စေသည်။ အမျှင်ဓာတ်ကြွယ်ဝပြီး ခန္ဓာကိုယ်တွင်း ဇီဝဖြစ်ပျက်မှုကို မြှင့်တင်ပေးပါတယ်။',
+                              'ဗီတာမင်နှင့် သတ္တုဓာတ်များဖြင့် ခိုင်ခံ့စေသည်။ အမျှင်ဓာတ်ကြွယ်ဝပြီး ခန္ဓာကိုယ်တွင်း ဇီဝဖြစ်ပျက်မှုကို မြှင့်တင်ပေးပါတယ်။',
                           style: TextStyle(color: Colors.black),
                         ),
                       ],
@@ -886,8 +865,7 @@ class HomeScreen extends StatelessWidget {
           ),
           Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: Colors.white),
+                borderRadius: BorderRadius.circular(8), color: Colors.white),
             padding: const EdgeInsets.all(16),
             margin: const EdgeInsets.symmetric(vertical: 16),
             child: Row(
@@ -899,8 +877,7 @@ class HomeScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: const Color.fromRGBO(28, 0, 194, 1),
                       border: Border.all(
-                          width: 4,
-                          color: Colors.white.withOpacity(0.5)),
+                          width: 4, color: Colors.white.withOpacity(0.5)),
                       shape: BoxShape.circle),
                   child: const Text(
                     '၁လ',
@@ -918,7 +895,7 @@ class HomeScreen extends StatelessWidget {
                           color: Colors.black,
                           fontSize: 13.0,
                           fontWeight: FontWeight.bold,
-                          height: 0),
+                          height: 1.5),
                       children: [
                         TextSpan(
                           text: '၁ လ 5-6 ကီလိုဂရမ်ဆုံးရှုံး:\n',
@@ -926,7 +903,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         TextSpan(
                           text:
-                          'အဆီစုပ်ယူမှုကို လျှော့ချပေးပြီး ကိုယ်အလေးချိန်ကို ထိန်းပေးသည်။',
+                              'အဆီစုပ်ယူမှုကို လျှော့ချပေးပြီး ကိုယ်အလေးချိန်ကို ထိန်းပေးသည်။',
                           style: TextStyle(color: Colors.black),
                         ),
                       ],
@@ -987,8 +964,7 @@ class HomeScreen extends StatelessWidget {
                         width: 154,
                         height: 154,
                         child: const CircleAvatar(
-                          backgroundImage:
-                          AssetImage('assets/lab1.jpg'),
+                          backgroundImage: AssetImage('assets/lab1.jpg'),
                         ),
                       ),
                     ),
@@ -1007,8 +983,7 @@ class HomeScreen extends StatelessWidget {
                         width: 120,
                         height: 120,
                         child: const CircleAvatar(
-                          backgroundImage:
-                          AssetImage('assets/lab2.jpg'),
+                          backgroundImage: AssetImage('assets/lab2.jpg'),
                         ),
                       ),
                     ),
@@ -1027,8 +1002,7 @@ class HomeScreen extends StatelessWidget {
                         width: 92,
                         height: 92,
                         child: const CircleAvatar(
-                          backgroundImage:
-                          AssetImage('assets/lab5.jpg'),
+                          backgroundImage: AssetImage('assets/lab5.jpg'),
                         ),
                       ),
                     ),
@@ -1047,8 +1021,7 @@ class HomeScreen extends StatelessWidget {
                         width: 100,
                         height: 100,
                         child: const CircleAvatar(
-                          backgroundImage:
-                          AssetImage('assets/lab4.jpg'),
+                          backgroundImage: AssetImage('assets/lab4.jpg'),
                         ),
                       ),
                     ),
@@ -1067,8 +1040,7 @@ class HomeScreen extends StatelessWidget {
                         width: 146,
                         height: 146,
                         child: const CircleAvatar(
-                          backgroundImage:
-                          AssetImage('assets/lab5.jpg'),
+                          backgroundImage: AssetImage('assets/lab5.jpg'),
                         ),
                       ),
                     ),
@@ -1087,8 +1059,7 @@ class HomeScreen extends StatelessWidget {
                         width: 146,
                         height: 146,
                         child: const CircleAvatar(
-                          backgroundImage:
-                          AssetImage('assets/lab6.jpg'),
+                          backgroundImage: AssetImage('assets/lab6.jpg'),
                         ),
                       ),
                     ),
@@ -1107,8 +1078,7 @@ class HomeScreen extends StatelessWidget {
                               color: Colors.white,
                             )),
                         child: const CircleAvatar(
-                          backgroundImage:
-                          AssetImage('assets/lab3.jpg'),
+                          backgroundImage: AssetImage('assets/lab3.jpg'),
                         ),
                       ),
                     ),
@@ -1149,8 +1119,7 @@ class HomeScreen extends StatelessWidget {
           ),
           Image.asset('assets/how.png', fit: BoxFit.contain),
           Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: 8.0, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
             child: RichText(
               text: const TextSpan(
                 style: TextStyle(
@@ -1165,7 +1134,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   TextSpan(
                     text:
-                    '3-5 ဇွန်းကို 55-56 ဒီဂရီ မှည့် 150ml ဖြင့် ရောမွှေပါ။ 180ml လောက်ရအောင် မွှေပါ။',
+                        '3-5 ဇွန်းကို 55-56 ဒီဂရီ မှည့် 150ml ဖြင့် ရောမွှေပါ။ 180ml လောက်ရအောင် မွှေပါ။',
                   ),
                 ],
               ),
@@ -1189,8 +1158,8 @@ class HomeScreen extends StatelessWidget {
                 TextSpan(
                   text: 'မှ အပြည့်အဝထောက်ခံချက်',
                   style: TextStyle(
-                      color: Colors
-                          .black87), // Change the color of '၏ထိရောက်မှု'
+                      color:
+                          Colors.black87), // Change the color of '၏ထိရောက်မှု'
                 ),
               ],
             ),
@@ -1202,8 +1171,7 @@ class HomeScreen extends StatelessWidget {
             height: 56,
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                  const Color.fromARGB(255, 255, 33, 17),
+                  backgroundColor: const Color.fromARGB(255, 255, 33, 17),
                   elevation: 8,
                 ),
                 onPressed: scrollToForm,
@@ -1255,14 +1223,14 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: 16.0),
                   const Text(
                     'Thar Lay',
-                    style: TextStyle(
-                        fontSize: 18.0, fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12.0),
                   Row(
                     children: List.generate(
                       5,
-                          (index) => const Icon(
+                      (index) => const Icon(
                         Icons.star,
                         color: Colors.yellow,
                       ),
@@ -1301,14 +1269,14 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: 16.0),
                   const Text(
                     'May Myat Mon',
-                    style: TextStyle(
-                        fontSize: 18.0, fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12.0),
                   Row(
                     children: List.generate(
                       5,
-                          (index) => const Icon(
+                      (index) => const Icon(
                         Icons.star,
                         color: Colors.yellow,
                       ),
@@ -1347,14 +1315,14 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: 16.0),
                   const Text(
                     'Alex sandro',
-                    style: TextStyle(
-                        fontSize: 18.0, fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12.0),
                   Row(
                     children: List.generate(
                       5,
-                          (index) => const Icon(
+                      (index) => const Icon(
                         Icons.star,
                         color: Colors.yellow,
                       ),
@@ -1393,14 +1361,14 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: 16.0),
                   const Text(
                     'Zar Lay',
-                    style: TextStyle(
-                        fontSize: 18.0, fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12.0),
                   Row(
                     children: List.generate(
                       5,
-                          (index) => const Icon(
+                      (index) => const Icon(
                         Icons.star,
                         color: Colors.yellow,
                       ),
@@ -1431,8 +1399,7 @@ class HomeScreen extends StatelessWidget {
       ),
       Container(
         color: Colors.red,
-        padding:
-        const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
         child: const Text(
           'ကုန်ပစ္စည်းအတုများ လက်ခံရရှိခြင်းမှ ရှောင်ကြဉ်ရန်၊ ကျေးဇူးပြု၍ ဘေလ်ပေါ်ရှိ ပေးပို့သူ အချက်အလက်ကို စစ်ဆေးပြီး ဓာတ်ပုံတွင် ပြထားသည့်အတိုင်း ပေးပို့သူ အချက်အလက်ဖြင့် မှန်ကန်သော မှာယူမှုကိုသာ လက်ခံပါ။',
           style: TextStyle(
@@ -1449,8 +1416,7 @@ class HomeScreen extends StatelessWidget {
       const MyForm(),
       // Comments
       Padding(
-        padding:
-        const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -1468,25 +1434,23 @@ class HomeScreen extends StatelessWidget {
               children: [
                 const Text(
                   'မှတ်ချက် ၆၇၆',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600, fontSize: 14),
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
                 ),
                 const Text(
                   'ဖြင့် စီစဉ်သည်။',
                   style: TextStyle(fontSize: 12),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16, vertical: 8),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   decoration: BoxDecoration(
                       color: Colors.grey.shade200,
                       borderRadius: BorderRadius.circular(6),
-                      border: Border.all(
-                          color: Colors.grey.shade300, width: 2)),
+                      border:
+                          Border.all(color: Colors.grey.shade300, width: 2)),
                   child: const Text(
                     'ဇာတ်လိုက်',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600, fontSize: 14),
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
                   ),
                 ),
               ],
@@ -1524,8 +1488,7 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         const Text(
                           'Jacqueline Jurado',
-                          style:
-                          TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 4),
                         const Text(
@@ -1570,8 +1533,8 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             const Text(
                               'Like - Feedback',
-                              style: TextStyle(
-                                  color: Colors.blue, fontSize: 12),
+                              style:
+                                  TextStyle(color: Colors.blue, fontSize: 12),
                             ),
                             const SizedBox(width: 12.0),
                             Container(
@@ -1591,14 +1554,13 @@ class HomeScreen extends StatelessWidget {
                             const Text(
                               '2',
                               style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.black54),
+                                  fontSize: 12, color: Colors.black54),
                             ),
                             const SizedBox(width: 4.0),
                             const Text(
                               '9 hours ago',
-                              style: TextStyle(
-                                  fontSize: 12, color: Colors.blue),
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.blue),
                             ),
                           ],
                         ),
@@ -1606,14 +1568,13 @@ class HomeScreen extends StatelessWidget {
                         Container(
                           margin: const EdgeInsets.only(bottom: 16),
                           child: const Row(
-                            crossAxisAlignment:
-                            CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               CircleAvatar(
                                 radius: 28,
                                 backgroundColor: Colors.white,
                                 backgroundImage:
-                                AssetImage('assets/profile.jpg'),
+                                    AssetImage('assets/profile.jpg'),
                               ),
                               // Container(
                               //   width: 56.0,
@@ -1632,14 +1593,12 @@ class HomeScreen extends StatelessWidget {
                               SizedBox(width: 12.0),
                               Expanded(
                                 child: Column(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       'Hogi',
                                       style: TextStyle(
-                                          fontWeight:
-                                          FontWeight.bold),
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     SizedBox(height: 4),
                                     Text(
@@ -1647,8 +1606,7 @@ class HomeScreen extends StatelessWidget {
                                       style: TextStyle(
                                           height: 1.8,
                                           fontSize: 12,
-                                          fontWeight:
-                                          FontWeight.w400),
+                                          fontWeight: FontWeight.w400),
                                     ),
                                     SizedBox(height: 8),
                                     Row(
@@ -1686,14 +1644,12 @@ class HomeScreen extends StatelessWidget {
                                         Text(
                                           'Feedback - ',
                                           style: TextStyle(
-                                              color: Colors.blue,
-                                              fontSize: 12),
+                                              color: Colors.blue, fontSize: 12),
                                         ),
                                         Text(
                                           '52 minutes ago',
                                           style: TextStyle(
-                                              fontSize: 12,
-                                              color: Colors.grey),
+                                              fontSize: 12, color: Colors.grey),
                                         ),
                                       ],
                                     ),
@@ -1737,8 +1693,7 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         const Text(
                           'Scarlet Rodriguez',
-                          style:
-                          TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 4),
                         const Text(
@@ -1783,8 +1738,8 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             const Text(
                               'Like - Feedback',
-                              style: TextStyle(
-                                  color: Colors.blue, fontSize: 12),
+                              style:
+                                  TextStyle(color: Colors.blue, fontSize: 12),
                             ),
                             const SizedBox(width: 12.0),
                             Container(
@@ -1804,14 +1759,13 @@ class HomeScreen extends StatelessWidget {
                             const Text(
                               '6',
                               style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.black54),
+                                  fontSize: 12, color: Colors.black54),
                             ),
                             const SizedBox(width: 4.0),
                             const Text(
                               '9 days ago',
-                              style: TextStyle(
-                                  fontSize: 12, color: Colors.blue),
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.blue),
                             ),
                           ],
                         ),
@@ -1849,8 +1803,7 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         const Text(
                           'Yadanar Oo',
-                          style:
-                          TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 4),
                         const Text(
@@ -1895,8 +1848,8 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             const Text(
                               'Like - Feedback',
-                              style: TextStyle(
-                                  color: Colors.blue, fontSize: 12),
+                              style:
+                                  TextStyle(color: Colors.blue, fontSize: 12),
                             ),
                             const SizedBox(width: 12.0),
                             Container(
@@ -1916,14 +1869,13 @@ class HomeScreen extends StatelessWidget {
                             const Text(
                               '2',
                               style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.black54),
+                                  fontSize: 12, color: Colors.black54),
                             ),
                             const SizedBox(width: 4.0),
                             const Text(
                               '16 hours ago',
-                              style: TextStyle(
-                                  fontSize: 12, color: Colors.blue),
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.blue),
                             ),
                           ],
                         ),
@@ -1961,8 +1913,7 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         const Text(
                           'Agnes D. Jalli',
-                          style:
-                          TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 4),
                         const Text(
@@ -2007,8 +1958,8 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             const Text(
                               'Like - Feedback',
-                              style: TextStyle(
-                                  color: Colors.blue, fontSize: 12),
+                              style:
+                                  TextStyle(color: Colors.blue, fontSize: 12),
                             ),
                             const SizedBox(width: 12.0),
                             Container(
@@ -2028,14 +1979,13 @@ class HomeScreen extends StatelessWidget {
                             const Text(
                               '2',
                               style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.black54),
+                                  fontSize: 12, color: Colors.black54),
                             ),
                             const SizedBox(width: 4.0),
                             const Text(
                               '3 days ago',
-                              style: TextStyle(
-                                  fontSize: 12, color: Colors.blue),
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.blue),
                             ),
                           ],
                         ),
@@ -2073,8 +2023,7 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         const Text(
                           'Ladi',
-                          style:
-                          TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 4),
                         const Text(
@@ -2119,8 +2068,8 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             const Text(
                               'Like - Feedback',
-                              style: TextStyle(
-                                  color: Colors.blue, fontSize: 12),
+                              style:
+                                  TextStyle(color: Colors.blue, fontSize: 12),
                             ),
                             const SizedBox(width: 12.0),
                             Container(
@@ -2140,14 +2089,13 @@ class HomeScreen extends StatelessWidget {
                             const Text(
                               '112',
                               style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.black54),
+                                  fontSize: 12, color: Colors.black54),
                             ),
                             const SizedBox(width: 4.0),
                             const Text(
                               '1 day ago',
-                              style: TextStyle(
-                                  fontSize: 12, color: Colors.blue),
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.blue),
                             ),
                           ],
                         ),
@@ -2224,8 +2172,7 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
-                    width: 36), // Add some space between the columns
+                SizedBox(width: 36), // Add some space between the columns
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -2276,8 +2223,8 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Center(
         child: Container(
-          constraints: const BoxConstraints(
-            maxWidth: 360,
+          constraints: BoxConstraints(
+            maxWidth: maxWidth,
           ),
           child: ScrollablePositionedList.builder(
               itemCount: widgets.length,
@@ -2285,10 +2232,33 @@ class HomeScreen extends StatelessWidget {
               scrollOffsetController: scrollOffsetController,
               itemPositionsListener: itemPositionsListener,
               scrollOffsetListener: scrollOffsetListener,
-              itemBuilder: (context,index){
+              itemBuilder: (context, index) {
                 return widgets[index];
-              }
-          ),
+                // if (widgets[index] is Consumer<DataManager>) {
+                //   // Wrap the Consumer with a conditional check for DataManager availability
+                //   return Consumer<DataManager>(
+                //     builder: (context, data, child) {
+                //       // Check if DataManager is available and images is not null
+                //       if (data.images.isNotEmpty) {
+                //         return SizedBox(
+                //           width: double.infinity,
+                //           height: 520,
+                //           child: Image.network(
+                //             data.images['img1'],
+                //             fit: BoxFit.cover,
+                //           ),
+                //         );
+                //       } else {
+                //         return Container(
+                //             height: 520, color: Colors.grey.shade200);
+                //       }
+                //     },
+                //   );
+                // } else {
+                //   // Return other widgets as usual
+                //   return widgets[index];
+                // }
+              }),
         ),
       ),
     );

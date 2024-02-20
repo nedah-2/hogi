@@ -32,7 +32,7 @@ class _GradientButtonState extends State<GradientButton>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 600),
+      duration: const Duration(milliseconds: 800),
     )..repeat(reverse: true);
     _animation = Tween<double>(begin: 1.0, end: 1.05).animate(_controller);
   }
