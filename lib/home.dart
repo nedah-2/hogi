@@ -98,37 +98,7 @@ class HomeScreen extends StatelessWidget {
                     textColor: Colors.black,
                     borderColor: Colors.black,
                   ),
-                  // ElevatedButton(
-                  //   style: ButtonStyle(
-                  //     backgroundColor: MaterialStateProperty.all<
-                  //             Color>(
-                  //         const Color.fromARGB(255, 255, 166, 33)),
-                  //     elevation: MaterialStateProperty.all(4),
-                  //     shape: MaterialStateProperty.all<
-                  //         RoundedRectangleBorder>(
-                  //       RoundedRectangleBorder(
-                  //         borderRadius: BorderRadius.circular(32.0),
-                  //         side: const BorderSide(
-                  //             color: Colors.black, width: 2),
-                  //       ),
-                  //     ),
-                  //     padding: MaterialStateProperty.all<
-                  //         EdgeInsetsGeometry>(
-                  //       const EdgeInsets.symmetric(
-                  //           vertical: 12, horizontal: 32),
-                  //     ),
-                  //   ),
-                  //   onPressed: scrollToForm,
-                  //   child: const Text(
-                  //     '50 % လျှော့ဈေး',
-                  //     style: TextStyle(
-                  //         color: Colors.black,
-                  //         fontSize: 18,
-                  //         fontWeight: FontWeight.bold),
-                  //   ),
-                  // ),
                   const Spacer(),
-
                   Transform(
                     alignment: Alignment.center,
                     transform: Matrix4.identity()..scale(-1.0, 1.0),
