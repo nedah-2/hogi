@@ -17,15 +17,15 @@ class _HeroImageState extends State<HeroImage> {
     return Consumer<DataManager>(
       builder: (context, data, child) {
         if (data.images['img1'] == null) {
-          return Container(height: 520, color: Colors.grey.shade100);
+          return Container(height: 560, color: Colors.grey.shade100);
         }
         // Use yourProvider to access the data or methods provided by your provider
         return SizedBox(
           width: double.infinity,
-          height: 520,
+          // height: 520,
           child: Image.network(
             images['img1'],
-            fit: BoxFit.cover,
+            fit: BoxFit.contain,
           ),
         );
       },

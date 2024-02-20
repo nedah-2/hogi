@@ -2189,46 +2189,48 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     ];
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: Container(
-          constraints: BoxConstraints(
-            maxWidth: maxWidth,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(
+          child: Container(
+            constraints: BoxConstraints(
+              maxWidth: maxWidth,
+            ),
+            child: ScrollablePositionedList.builder(
+                itemCount: widgets.length,
+                itemScrollController: itemScrollController,
+                scrollOffsetController: scrollOffsetController,
+                itemPositionsListener: itemPositionsListener,
+                scrollOffsetListener: scrollOffsetListener,
+                itemBuilder: (context, index) {
+                  return widgets[index];
+                  // if (widgets[index] is Consumer<DataManager>) {
+                  //   // Wrap the Consumer with a conditional check for DataManager availability
+                  //   return Consumer<DataManager>(
+                  //     builder: (context, data, child) {
+                  //       // Check if DataManager is available and images is not null
+                  //       if (data.images.isNotEmpty) {
+                  //         return SizedBox(
+                  //           width: double.infinity,
+                  //           height: 520,
+                  //           child: Image.network(
+                  //             data.images['img1'],
+                  //             fit: BoxFit.cover,
+                  //           ),
+                  //         );
+                  //       } else {
+                  //         return Container(
+                  //             height: 520, color: Colors.grey.shade200);
+                  //       }
+                  //     },
+                  //   );
+                  // } else {
+                  //   // Return other widgets as usual
+                  //   return widgets[index];
+                  // }
+                }),
           ),
-          child: ScrollablePositionedList.builder(
-              itemCount: widgets.length,
-              itemScrollController: itemScrollController,
-              scrollOffsetController: scrollOffsetController,
-              itemPositionsListener: itemPositionsListener,
-              scrollOffsetListener: scrollOffsetListener,
-              itemBuilder: (context, index) {
-                return widgets[index];
-                // if (widgets[index] is Consumer<DataManager>) {
-                //   // Wrap the Consumer with a conditional check for DataManager availability
-                //   return Consumer<DataManager>(
-                //     builder: (context, data, child) {
-                //       // Check if DataManager is available and images is not null
-                //       if (data.images.isNotEmpty) {
-                //         return SizedBox(
-                //           width: double.infinity,
-                //           height: 520,
-                //           child: Image.network(
-                //             data.images['img1'],
-                //             fit: BoxFit.cover,
-                //           ),
-                //         );
-                //       } else {
-                //         return Container(
-                //             height: 520, color: Colors.grey.shade200);
-                //       }
-                //     },
-                //   );
-                // } else {
-                //   // Return other widgets as usual
-                //   return widgets[index];
-                // }
-              }),
         ),
       ),
     );
